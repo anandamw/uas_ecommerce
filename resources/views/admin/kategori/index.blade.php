@@ -206,17 +206,3 @@
 
     </div>
 @endsection
-<script>
-    function toggleFileInput() {
-        const formatSelect = document.getElementById('format_buku');
-        const fileInputDiv = document.getElementById('fileInputDiv');
-
-        if (formatSelect.value === 'E-Book') {
-            fileInputDiv.style.display = 'block';
-            document.getElementById('file_buku').required = true;
-        } else {
-            fileInputDiv.style.display = 'none';
-            document.getElementById('file_buku').required = false;
-        }
-    }
-</script>
