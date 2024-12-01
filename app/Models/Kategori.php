@@ -16,4 +16,5 @@ class Kategori extends Model
     {
         return $this->belongsToMany(Format::class, 'format_kategori', 'kategoris_id', 'formats_id');
     }
+  
 }

@@ -10,4 +10,8 @@ class Produk extends Model
     use HasFactory;
     protected $table = "produks";
     protected $guarded = ["id"];
+
+
+
+   
 }

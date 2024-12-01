@@ -38,10 +38,7 @@
                                                 <button type="button" class="btn btn-success add-btn"
                                                     data-bs-toggle="modal" id="create-btn" data-bs-target="#createModal"><i
                                                         class="ri-add-line align-bottom me-1"></i> Add</button>
-
-                                                <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i
-                                                        class="ri-delete-bin-2-line"></i></button>
-                                                @include('admin.kategori.create')
+                                                @include('admin.produk.create')
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -59,38 +56,37 @@
                                         <table class="table align-middle table-nowrap" id="customerTable">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th scope="col" style="width: 50px;">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" id="checkAll"
-                                                                value="option">
-                                                        </div>
-                                                    </th>
+
                                                     <th class="sort" data-sort="no">No</th>
-                                                    <th class="sort" data-sort="email">Nama Kategori</th>
-                                                    <th class="sort" data-sort="phone">Format Buku</th>
-                                                    <th class="sort" data-sort="date">File Buku</th>
+                                                    <th class="sort" data-sort="email">Judul Buku</th>
+                                                    <th class="sort" data-sort="phone">Penerbit</th>
+                                                    <th class="sort" data-sort="date">Penulis</th>
+                                                    <th class="sort" data-sort="email">Kategori</th>
+                                                    <th class="sort" data-sort="date">Halaman</th>
+                                                    <th class="sort" data-sort="date">Bahasa</th>
+                                                    <th class="sort" data-sort="date">Deskripsi</th>
+                                                    <th class="sort" data-sort="date">Harga</th>
                                                     <th class="sort" data-sort="action">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="list form-check-all">
                                                 @foreach ($produks as $item)
                                                     <tr>
-                                                        <th scope="row">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="chk_child" value="option1">
-                                                            </div>
-                                                        </th>
+
                                                         <td class="email">{{ $loop->iteration }}</td>
-                                                        <td class="customer_name">{{ $item->nama_kategori }}</td>
-
-
-
-                                                        <td class="status">
-                                                            <span
-                                                                class="badge bg-warning-subtle text-warning text-uppercase">unlink</span>
+                                                        <td class="customer_name">
+                                                            <a href="#" data-bs-toggle="modal"
+                                                                data-bs-target="#viewImageModal{{ $item->id }}">
+                                                                {{ $item->judul_buku }}
+                                                            </a>
                                                         </td>
-
+                                                        <td class="customer_name">{{ $item->penerbit }}</td>
+                                                        <td class="customer_name">{{ $item->penulis }}</td>
+                                                        <td class="customer_name">{{ $item->nama_kategori }}</td>
+                                                        <td class="customer_name">{{ $item->halaman }}</td>
+                                                        <td class="customer_name">{{ $item->bahasa }}</td>
+                                                        <td class="customer_name text-justify">{{ $item->deskripsi }}</td>
+                                                        <td class="customer_name">{{ $item->harga }}</td>
 
                                                         <td>
                                                             <div class="d-flex gap-2">
@@ -107,15 +103,40 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    @include('admin.kategori.edit')
+                                                    <div class="modal fade" id="viewImageModal{{ $item->id }}"
+                                                        tabindex="-1"
+                                                        aria-labelledby="viewImageModalLabel{{ $item->id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="viewImageModalLabel{{ $item->id }}">
+                                                                        {{ $item->judul_buku }}</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <img src="{{ asset('foto_buku/' . $item->foto_buku) }}"
+                                                                        alt="{{ $item->judul_buku }}" class="img-fluid">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @include('admin.produk.edit')
 
 
 
 
 
                                                     <!-- Modal -->
-                                                    <div class="modal fade zoomIn" id="deleteRecordModal{{ $item->id }}"
-                                                        tabindex="-1" aria-hidden="true">
+                                                    <div class="modal fade zoomIn"
+                                                        id="deleteRecordModal{{ $item->id }}" tabindex="-1"
+                                                        aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
@@ -141,7 +162,7 @@
                                                                         class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                                                         <button type="button" class="btn w-sm btn-light"
                                                                             data-bs-dismiss="modal">Close</button>
-                                                                        <a href="/kategori/{{ $item->id }}/delete"
+                                                                        <a href="/produk/{{ $item->id }}/delete"
                                                                             type="submit" class="btn w-sm btn-danger "
                                                                             id="delete-record">Yes, Delete
                                                                             It!</a>
@@ -200,17 +221,3 @@
 
     </div>
 @endsection
-<script>
-    function toggleFileInput() {
-        const formatSelect = document.getElementById('format_buku');
-        const fileInputDiv = document.getElementById('fileInputDiv');
-
-        if (formatSelect.value === 'E-Book') {
-            fileInputDiv.style.display = 'block';
-            document.getElementById('file_buku').required = true;
-        } else {
-            fileInputDiv.style.display = 'none';
-            document.getElementById('file_buku').required = false;
-        }
-    }
-</script>

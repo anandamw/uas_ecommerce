@@ -28,3 +28,6 @@ Route::post('/kategori/{id}/update', [KategoriController::class, 'update']);
 Route::get('/kategori/{id}/delete', [KategoriController::class, 'delete']);
 
 Route::get('/produk', [ProdukController::class, 'index']);
+Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
+Route::post('/produk/store', [ProdukController::class, 'store']);
+Route::get('/produk/{id}/delete', [ProdukController::class, 'delete']);

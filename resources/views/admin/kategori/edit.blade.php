@@ -31,9 +31,9 @@
                         @foreach ($formats as $get)
                             <div class="form-check">
                                 <input class="form-check-input" value="{{ $get->id }}" name="format_buku[]"
-                                    type="checkbox" id="formCheck5"
+                                    type="checkbox" id="{{ $get->nama_format }}"
                                     {{ $item->formats->contains($get->id) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="formCheck5" for="{{ $get->nama_format }}">
+                                <label class="form-check-label" for="{{ $get->nama_format }}">
                                     {{ $get->nama_format }}
                                 </label>
                             </div>

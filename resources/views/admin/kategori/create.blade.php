@@ -30,8 +30,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" value="{{ $get->id }}" name="format_buku[]"
                                     type="checkbox" id="{{ $get->nama_format }}">
-                                <label class="form-check-label" for="{{ $get->nama_format }}"
-                                    for="{{ $get->nama_format }}">
+                                <label class="form-check-label" for="{{ $get->nama_format }}">
                                     {{ $get->nama_format }}
                                 </label>
                             </div>

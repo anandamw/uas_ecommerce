@@ -22,7 +22,6 @@
                     </div>
                 </div>
                 <!-- end page title -->
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -39,8 +38,6 @@
                                                     data-bs-toggle="modal" id="create-btn" data-bs-target="#createModal"><i
                                                         class="ri-add-line align-bottom me-1"></i> Add</button>
 
-                                                <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i
-                                                        class="ri-delete-bin-2-line"></i></button>
                                                 @include('admin.kategori.create')
                                             </div>
                                         </div>
@@ -59,12 +56,7 @@
                                         <table class="table align-middle table-nowrap" id="customerTable">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th scope="col" style="width: 50px;">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" id="checkAll"
-                                                                value="option">
-                                                        </div>
-                                                    </th>
+
                                                     <th class="sort" data-sort="no">No</th>
                                                     <th class="sort" data-sort="email">Nama Kategori</th>
                                                     <th class="sort" data-sort="phone">Format Buku</th>
@@ -75,12 +67,7 @@
                                             <tbody class="list form-check-all">
                                                 @foreach ($kategori as $item)
                                                     <tr>
-                                                        <th scope="row">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="chk_child" value="option1">
-                                                            </div>
-                                                        </th>
+
                                                         <td class="email">{{ $loop->iteration }}</td>
                                                         <td class="customer_name">{{ $item->nama_kategori }}</td>
                                                         <td class="status">
