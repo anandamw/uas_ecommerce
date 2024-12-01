@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlamatController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard');
 });
+
+
+
+Route::get('/kategori', [KategoriController::class, 'index']);
+Route::post('/kategori/store', [KategoriController::class, 'store']);
+Route::post('/kategori/{id}/update', [KategoriController::class, 'update']);
+Route::get('/kategori/{id}/delete', [KategoriController::class, 'delete']);
+
+Route::get('/produk', [ProdukController::class, 'index']);
