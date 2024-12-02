@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlamatController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,5 @@ Route::get('/produk', [ProdukController::class, 'index']);
 Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
 Route::post('/produk/store', [ProdukController::class, 'store']);
 Route::get('/produk/{id}/delete', [ProdukController::class, 'delete']);
+
+Route::get('/pages',[HomeController::class, 'index']);
