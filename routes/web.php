@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AlamatController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
@@ -17,20 +19,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('auth.login');
+    })->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::get('/coba', function () {
+        return view('admin.coba');
+    });
 });
 
+Route::middleware(['auth', 'userAkses:admin'])->group(function () {
+    Route::get('/home', function () {
+        return redirect('dashboard');
+    });
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+    Route::get('/keranjang/{token}', [CartController::class, 'cart']);
+    Route::get('/keranjang/hapus/{token}', [CartController::class, 'delete']);
 
+    Route::get('/produk', [ProdukController::class, 'index']);
+    Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
+    Route::post('/produk/store', [ProdukController::class, 'store']);
+    Route::get('/produk/{id}/delete', [ProdukController::class, 'delete']);
 
-Route::get('/kategori', [KategoriController::class, 'index']);
-Route::post('/kategori/store', [KategoriController::class, 'store']);
-Route::post('/kategori/{id}/update', [KategoriController::class, 'update']);
-Route::get('/kategori/{id}/delete', [KategoriController::class, 'delete']);
-
-Route::get('/produk', [ProdukController::class, 'index']);
-Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
-Route::post('/produk/store', [ProdukController::class, 'store']);
-Route::get('/produk/{id}/delete', [ProdukController::class, 'delete']);
-
-Route::get('/pages',[HomeController::class, 'index']);
+    Route::get('/pages', [HomeController::class, 'index']);
+});

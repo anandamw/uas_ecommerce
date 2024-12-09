@@ -5,219 +5,333 @@
         <div class="page-content">
             <div class="container-fluid">
 
-                <!-- start page title -->
+                <!-- Start Page Title -->
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0">Listjs</h4>
-
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
                                     <li class="breadcrumb-item active">Listjs</li>
                                 </ol>
                             </div>
-
                         </div>
                     </div>
                 </div>
-                <!-- end page title -->
+                <!-- End Page Title -->
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <!-- Start Search Card -->
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Add, Edit & Remove</h4>
-                            </div><!-- end card header -->
-
+                                <h4 class="card-title mb-0">Cari Produk</h4>
+                            </div><!-- End Card Header -->
                             <div class="card-body">
-                                <div class="listjs-table" id="customerList">
-                                    <div class="row g-4 mb-3">
-                                        <div class="col-sm-auto">
-                                            <div>
-                                                <button type="button" class="btn btn-success add-btn"
-                                                    data-bs-toggle="modal" id="create-btn" data-bs-target="#createModal"><i
-                                                        class="ri-add-line align-bottom me-1"></i> Add</button>
-                                                @include('admin.produk.create')
+                                <div class="row g-4 mb-3">
+                                    <div class="col-sm">
+                                        <div class="d-flex justify-content-sm-end">
+                                            <div class="search-box ms-2">
+                                                <input type="text" class="form-control search" id="searchInput"
+                                                    placeholder="Search...">
+                                                <i class="ri-search-line search-icon"></i>
                                             </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="d-flex justify-content-sm-end">
-                                                <div class="search-box ms-2">
-                                                    <input type="text" class="form-control search"
-                                                        placeholder="Search...">
-                                                    <i class="ri-search-line search-icon"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="table-responsive table-card mt-3 mb-1">
-                                        <table class="table align-middle table-nowrap" id="customerTable">
-                                            <thead class="table-light">
-                                                <tr>
-
-                                                    <th class="sort" data-sort="no">No</th>
-                                                    <th class="sort" data-sort="email">Judul Buku</th>
-                                                    <th class="sort" data-sort="phone">Penerbit</th>
-                                                    <th class="sort" data-sort="date">Penulis</th>
-                                                    <th class="sort" data-sort="email">Kategori</th>
-                                                    <th class="sort" data-sort="date">Halaman</th>
-                                                    <th class="sort" data-sort="date">Bahasa</th>
-                                                    <th class="sort" data-sort="date">Deskripsi</th>
-                                                    <th class="sort" data-sort="date">Harga</th>
-                                                    <th class="sort" data-sort="action">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="list form-check-all">
-                                                @foreach ($produks as $item)
-                                                    <tr>
-
-                                                        <td class="email">{{ $loop->iteration }}</td>
-                                                        <td class="customer_name">
-                                                            <a href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#viewImageModal{{ $item->id }}">
-                                                                {{ $item->judul_buku }}
-                                                            </a>
-                                                        </td>
-                                                        <td class="customer_name">{{ $item->penerbit }}</td>
-                                                        <td class="customer_name">{{ $item->penulis }}</td>
-                                                        <td class="customer_name">{{ $item->nama_kategori }}</td>
-                                                        <td class="customer_name">{{ $item->halaman }}</td>
-                                                        <td class="customer_name">{{ $item->bahasa }}</td>
-                                                        <td class="customer_name text-justify">{{ $item->deskripsi }}</td>
-                                                        <td class="customer_name">{{ $item->harga }}</td>
-
-                                                        <td>
-                                                            <div class="d-flex gap-2">
-                                                                <div class="edit">
-                                                                    <button class="btn btn-sm btn-success edit-item-btn"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#showModal{{ $item->id }}">Edit</button>
-                                                                </div>
-                                                                <div class="remove">
-                                                                    <button class="btn btn-sm btn-danger remove-item-btn"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteRecordModal{{ $item->id }}">Remove</button>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <div class="modal fade" id="viewImageModal{{ $item->id }}"
-                                                        tabindex="-1"
-                                                        aria-labelledby="viewImageModalLabel{{ $item->id }}"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"
-                                                                        id="viewImageModalLabel{{ $item->id }}">
-                                                                        {{ $item->judul_buku }}</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body text-center">
-                                                                    <img src="{{ asset('foto_buku/' . $item->foto_buku) }}"
-                                                                        alt="{{ $item->judul_buku }}" class="img-fluid">
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @include('admin.produk.edit')
-
-
-
-
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade zoomIn"
-                                                        id="deleteRecordModal{{ $item->id }}" tabindex="-1"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"
-                                                                        id="btn-close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mt-2 text-center">
-                                                                        <lord-icon
-                                                                            src="../../../../cdn.lordicon.com/gsqxdxog.json"
-                                                                            trigger="loop"
-                                                                            colors="primary:#f7b84b,secondary:#f06548"
-                                                                            style="width:100px;height:100px"></lord-icon>
-                                                                        <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                                                                            <h4>Are you Sure ?</h4>
-                                                                            <p class="text-muted mx-4 mb-0">Are you Sure
-                                                                                You
-                                                                                want to Remove this Record ?</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                                                        <button type="button" class="btn w-sm btn-light"
-                                                                            data-bs-dismiss="modal">Close</button>
-                                                                        <a href="/produk/{{ $item->id }}/delete"
-                                                                            type="submit" class="btn w-sm btn-danger "
-                                                                            id="delete-record">Yes, Delete
-                                                                            It!</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--end modal -->
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <div class="noresult" style="display: none">
-                                            <div class="text-center">
-                                                <lord-icon src="../../../../cdn.lordicon.com/msoeawqm.json" trigger="loop"
-                                                    colors="primary:#121331,secondary:#08a88a"
-                                                    style="width:75px;height:75px"></lord-icon>
-                                                <h5 class="mt-2">Sorry! No Result Found</h5>
-                                                <p class="text-muted mb-0">We've searched more than 150+ Orders We did not
-                                                    find any orders for you search.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex justify-content-end">
-                                        <div class="pagination-wrap hstack gap-2">
-                                            <a class="page-item pagination-prev disabled" href="javascript:void(0);">
-                                                Previous
-                                            </a>
-                                            <ul class="pagination listjs-pagination mb-0"></ul>
-                                            <a class="page-item pagination-next" href="javascript:void(0);">
-                                                Next
-                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- end card -->
-                        </div>
-                        <!-- end col -->
-                    </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
+                            </div><!-- End Card Body -->
+                        </div><!-- End Card -->
+                    </div><!-- End Col -->
+                    <!-- End Search Card -->
+
+                    <!-- Start Table Card -->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Table -->
+                                <table class="table caption-top table-nowrap" id="dataTable">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Nama Buku</th>
+                                            <th scope="col">Jumlah Buku</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($produks as $item)
+                                            <tr>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $item->judul_buku }}</td>
+                                                <td>{{ $item->stok }}</td>
+                                                <td>Rp, {{ $item->harga }}</td>
+                                                <td>
+                                                    <i class="ri-shopping-cart-fill"></i>
+                                                    <a href="/keranjang/{{ $item->token_produks }}">Keranjang</a>
+                                                </td>
+                                            </tr>
+                                            <!-- Default Modals -->
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                <!-- No Results Found -->
+                                <div class="noresult" style="display: none;">
+                                    <div class="text-center">
+                                        <lord-icon src="../../../../cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                            colors="primary:#121331,secondary:#08a88a"
+                                            style="width:75px;height:75px"></lord-icon>
+                                        <h5 class="mt-2">Sorry! No Result Found</h5>
+                                        <p class="text-muted mb-0">We did not find any matches for your search.</p>
+                                    </div>
+                                </div>
+                            </div><!-- End Card Body -->
+                        </div><!-- End Card -->
+                    </div><!-- End Col -->
+                    <!-- End Table Card -->
+
+                </div><!-- End Row -->
+
+                <div class="row">
+                    <!-- Start Table Card -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Table -->
+                                <table class="table caption-top table-nowrap">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Nama Buku</th>
+                                            <th scope="col">Penerbit</th>
+                                            <th scope="col">Penulis</th>
+                                            <th scope="col">Jumlah Buku</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($carts as $index => $item)
+                                            <tr>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $item->judul_buku }}</td>
+                                                <td>{{ $item->penerbit }}</td>
+                                                <td>{{ $item->penulis }}</td>
+                                                <td>
+                                                    <div class="input-step step-primary">
+                                                        <button type="button" class="minus"
+                                                            data-index="{{ $index }}">–</button>
+                                                        <input type="number" class="product-quantity" value="0"
+                                                            min="0" max="100" data-index="{{ $index }}"
+                                                            data-price="{{ $item->harga }}">
+                                                        <button type="button" class="plus"
+                                                            data-index="{{ $index }}">+</button>
+                                                    </div>
+                                                </td>
+                                                <td>Rp, {{ number_format($item->harga) }}</td>
+                                                <td id="total-{{ $index }}">Rp, 0</td>
+                                                <td>
+                                                    <div type="button" class="text-primary" data-bs-toggle="modal"
+                                                        data-bs-target=".bs-example-modal-center">
+                                                        <i class="ri-delete-bin-line"></i>
+                                                        Hapus
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
+                                                aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body text-center p-5">
+                                                            <lord-icon src="https://cdn.lordicon.com/hrqwmuhr.json"
+                                                                trigger="loop" colors="primary:#121331,secondary:#08a88a"
+                                                                style="width:120px;height:120px"></lord-icon>
+                                                            <div class="mt-4">
+                                                                <h4 class="mb-3">Oops something went wrong!</h4>
+                                                                <p class="text-muted mb-4"> The transfer was not
+                                                                    successfully received by us. the email of the recipient
+                                                                    wasn't correct.</p>
+                                                                <div class="hstack gap-2 justify-content-center">
+                                                                    <button type="button" class="btn btn-light"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <a href="/keranjang/hapus/{{ $item->token_keranjang }}"
+                                                                        class="btn btn-danger">Hapus</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                                        @endforeach
 
 
+                                    </tbody>
+                                </table>
 
+                                <!-- No Results Found -->
+                                <div class="noresult" style="display: none;">
+                                    <div class="text-center">
+                                        <lord-icon src="../../../../cdn.lordicon.com/msoeawqm.json" trigger="loop"
+                                            colors="primary:#121331,secondary:#08a88a"
+                                            style="width:75px;height:75px"></lord-icon>
+                                        <h5 class="mt-2">Sorry! No Result Found</h5>
+                                        <p class="text-muted mb-0">We did not find any matches for your search.</p>
+                                    </div>
+                                </div>
 
+                            </div><!-- End Card Body -->
+                        </div><!-- End Card -->
+                        <a href="" class="btn btn-primary">Bayar case</a>
+                        <a href="" class="btn btn-warning">Bayar QRIS</a>
+                    </div><!-- End Col -->
+                    <!-- End Table Card -->
 
+                </div><!-- End Row -->
 
+            </div><!-- End Container Fluid -->
+        </div><!-- End Page Content -->
+    </div><!-- End Main Content -->
 
-            </div>
-            <!-- container-fluid -->
-        </div>
-        <!-- End Page-content -->
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Menyembunyikan semua baris tabel secara default
+            var rows = $('#dataTable tbody tr');
+            rows.hide(); // Sembunyikan semua baris saat halaman dimuat
 
+            // Event listener untuk input pencarian
+            $('#searchInput').on('input', function() {
+                var filter = $(this).val()
+                    .toLowerCase(); // Dapatkan nilai input pencarian dan ubah ke huruf kecil
+                var noResult = true; // Asumsi awal tidak ada hasil
 
-    </div>
+                // Jika input pencarian kosong, sembunyikan semua baris
+                if (filter === "") {
+                    rows.hide(); // Sembunyikan semua baris jika input pencarian kosong
+                    $('.noresult').hide(); // Sembunyikan pesan "No Result"
+                    return;
+                }
+
+                // Loop melalui setiap baris dan periksa apakah ada kecocokan
+                rows.each(function() {
+                    var row = $(this);
+                    var cells = row.find('td');
+                    var match = false;
+
+                    // Periksa apakah teks dalam setiap cell cocok dengan filter
+                    cells.each(function() {
+                        if ($(this).text().toLowerCase().includes(filter)) {
+                            match = true;
+                            return false; // Jika ada kecocokan, hentikan loop
+                        }
+                    });
+
+                    // Menampilkan atau menyembunyikan baris sesuai hasil pencarian
+                    if (match) {
+                        row.show(); // Tampilkan baris yang cocok
+                        noResult = false;
+                    } else {
+                        row.hide(); // Sembunyikan baris yang tidak cocok
+                    }
+                });
+
+                // Menampilkan pesan jika tidak ada hasil yang cocok
+                if (noResult) {
+                    $('.noresult').show(); // Tampilkan pesan "No Result"
+                } else {
+                    $('.noresult').hide(); // Sembunyikan pesan "No Result"
+                }
+            });
+        });
+    </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            // Tombol minus
+            $('.minus').on('click', function() {
+                var $input = $(this).siblings('.product-quantity'); // Cari input yang terkait dengan tombol
+                var value = parseInt($input.val(), 10); // Ambil nilai saat ini dari input
+                if (value > 0) { // Jika nilai lebih dari 0
+                    $input.val(value - 1); // Kurangi nilai
+                }
+            });
+
+            // Tombol plus
+            $('.plus').on('click', function() {
+                var $input = $(this).siblings('.product-quantity'); // Cari input yang terkait dengan tombol
+                var value = parseInt($input.val(), 10); // Ambil nilai saat ini dari input
+                if (value < 100) { // Jika nilai kurang dari 100
+                    $input.val(value + 1); // Tambah nilai
+                }
+            });
+
+            // Mengubah nilai dengan memasukkan angka manual
+            $('.product-quantity').on('input', function() {
+                var value = parseInt($(this).val(), 10);
+                if (value < 0) {
+                    $(this).val(0); // Jika nilai kurang dari 0, atur ke 0
+                } else if (value > 100) {
+                    $(this).val(100); // Jika nilai lebih dari 100, atur ke 100
+                }
+            });
+        });
+    </script> --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const plusButtons = document.querySelectorAll('.plus');
+            const minusButtons = document.querySelectorAll('.minus');
+            const quantityInputs = document.querySelectorAll('.product-quantity');
+
+            // Function to update the total for each item
+            function updateTotal(index) {
+                const quantity = parseInt(quantityInputs[index].value) || 0; // Get quantity, default to 0 if NaN
+                const price = parseInt(quantityInputs[index].getAttribute(
+                    'data-price')); // Get price from data attribute
+                const totalElement = document.getElementById(`total-${index}`);
+
+                if (isNaN(price)) {
+                    console.error("Invalid price value:", price);
+                    return;
+                }
+
+                const total = quantity * price; // Calculate total
+                totalElement.innerText = `Rp, ${total.toLocaleString()}`; // Update total with formatted price
+            }
+
+            // Add event listeners for the plus and minus buttons
+            plusButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index'); // Get the index of the row
+                    const quantityInput = document.querySelectorAll('.product-quantity')[index];
+                    let quantity = parseInt(quantityInput.value) || 0;
+                    quantityInput.value = quantity + 1;
+                    updateTotal(index); // Update total after increment
+                });
+            });
+
+            minusButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index'); // Get the index of the row
+                    const quantityInput = document.querySelectorAll('.product-quantity')[index];
+                    let quantity = parseInt(quantityInput.value) || 0;
+                    if (quantity > 0) {
+                        quantityInput.value = quantity - 1;
+                    }
+                    updateTotal(index); // Update total after decrement
+                });
+            });
+
+            // Add event listener for input quantity change
+            quantityInputs.forEach((input, index) => {
+                input.addEventListener('input', function() {
+                    updateTotal(index); // Update total when quantity is changed manually
+                });
+            });
+        });
+    </script>
 @endsection

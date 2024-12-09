@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Keranjang;
 
 class ProdukController extends Controller
 {
@@ -16,12 +17,14 @@ class ProdukController extends Controller
     public function index()
     {
         $data  = [
-            'produks' => Produk::join('kategoris', 'produks.kategoris_id', '=', 'kategoris.id')->select('produks.*', 'kategoris.nama_kategori')->get(),
-            "kategoris" => Kategori::all()
+            'produks' => Produk::get(),
+            "kategoris" => Kategori::all(),
+            "carts" => Keranjang::JoinKeranjang(),
         ];
 
         return view('admin.produk.index', $data);
     }
+
 
 
     public function store(Request $request)
