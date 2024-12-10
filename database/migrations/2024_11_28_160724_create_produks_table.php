@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id();
             $table->string('token_produks');
+            $table->string('supliyers')->nullable();
             $table->string('judul_buku');
             $table->string('penerbit');
             $table->string('penulis');

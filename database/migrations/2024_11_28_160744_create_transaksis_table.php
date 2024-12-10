@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
+            $table->string('token_customer');
+            $table->string('nama_pembeli');
+            $table->string('jenis_kelamin');
+            $table->string('alamat');
+            $table->string('no_telepon');
+            $table->string('nama_buku');
+            $table->string('quantity');
+            $table->string('total_harga');
+
             $table->timestamps();
         });
     }

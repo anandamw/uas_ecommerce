@@ -185,12 +185,63 @@
 
                             </div><!-- End Card Body -->
                         </div><!-- End Card -->
-                        <a href="" class="btn btn-primary">Bayar case</a>
-                        <a href="" class="btn btn-warning">Bayar QRIS</a>
+
                     </div><!-- End Col -->
                     <!-- End Table Card -->
 
                 </div><!-- End Row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+
+                            <div class="card-body">
+                                <div class="live-preview">
+                                    <div class="row gy-4">
+                                        <div class="col-xxl-3 col-md-6">
+                                            <div>
+                                                <label for="basiInput" class="form-label">Nama Pembeli</label>
+                                                <input type="text" class="form-control" id="basiInput" />
+                                            </div>
+                                        </div>
+                                        <!--end col-->
+                                        <div class="col-xxl-3 col-md-6">
+                                            <label for="basiInput" class="form-label">Pilih Jenis Kelamin:</label>
+
+                                            <select class="form-select mb-3" aria-label="Default select example">
+                                                <option selected>Open this select menu</option>
+                                                <option value="1">Laki-Laki</option>
+                                                <option value="2">Perempuan</option>
+                                            </select>
+                                        </div>
+                                        <!--end col-->
+                                        <div class="col-xxl-3 col-md-6">
+                                            <div>
+                                                <label for="basiInput" class="form-label">Alamat</label>
+                                                <input type="text" class="form-control" id="basiInput" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-3 col-md-6">
+                                            <div>
+                                                <label for="basiInput" class="form-label">No Telepon</label>
+                                                <input type="text" class="form-control" id="basiInput" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-3 col-md-6">
+                                            <h6 id="total-harga">Total Harga: 0</h6>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
+                                </div>
+
+                            </div>
+                        </div>
+                        <a href="" class="btn btn-primary">Bayar Cash</a>
+                        <a href="" class="btn btn-warning">Bayar QRIS</a>
+                    </div>
+                    <!--end col-->
+                </div>
 
             </div><!-- End Container Fluid -->
         </div><!-- End Page Content -->
@@ -198,6 +249,62 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = document.querySelectorAll(".product-quantity");
+            const totalHargaElement = document.getElementById("total-harga");
+
+            // Fungsi untuk menghitung total harga
+            function calculateTotal() {
+                let grandTotal = 0;
+
+                inputs.forEach(input => {
+                    const index = input.getAttribute("data-index");
+                    const price = parseInt(input.getAttribute("data-price"));
+                    const quantity = parseInt(input.value);
+                    const rowTotal = price * quantity;
+
+                    // Update total per baris
+                    document.getElementById(`total-${index}`).textContent =
+                        `Rp, ${rowTotal.toLocaleString()}`;
+
+                    // Tambahkan ke grand total
+                    grandTotal += rowTotal;
+                });
+
+                // Update total keseluruhan
+                totalHargaElement.textContent = `Total Harga: Rp, ${grandTotal.toLocaleString()}`;
+            }
+
+            // Tambahkan event listener ke setiap input
+            inputs.forEach(input => {
+                input.addEventListener("input", calculateTotal);
+                input.addEventListener("change", calculateTotal);
+            });
+
+            // Tambahkan event listener untuk tombol plus/minus
+            document.querySelectorAll(".plus, .minus").forEach(button => {
+                button.addEventListener("click", function() {
+                    const index = this.getAttribute("data-index");
+                    const input = document.querySelector(
+                    `.product-quantity[data-index="${index}"]`);
+
+                    if (this.classList.contains("plus")) {
+                        input.stepUp();
+                    } else if (this.classList.contains("minus")) {
+                        input.stepDown();
+                    }
+
+                    // Hitung ulang total
+                    calculateTotal();
+                });
+            });
+
+            // Inisialisasi penghitungan saat pertama kali dimuat
+            calculateTotal();
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             // Menyembunyikan semua baris tabel secara default
@@ -281,7 +388,7 @@
             });
         });
     </script> --}}
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             const plusButtons = document.querySelectorAll('.plus');
             const minusButtons = document.querySelectorAll('.minus');
@@ -333,5 +440,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endsection

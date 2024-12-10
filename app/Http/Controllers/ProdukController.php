@@ -18,7 +18,6 @@ class ProdukController extends Controller
     {
         $data  = [
             'produks' => Produk::get(),
-            "kategoris" => Kategori::all(),
             "carts" => Keranjang::JoinKeranjang(),
         ];
 
