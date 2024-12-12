@@ -43,7 +43,7 @@ class CheckoutController extends Controller
                 Transaksi::create([
                     'token_customer' => $tokenCustomer,
                     'nama_pelayan' => auth()->user()->name, // Use the same token for all items
-                    'total_harga' => $item->total_harga * $item->quantity,
+                    'total_harga' => $item->total_harga,
                     'quantity' => $item->quantity,
                     'produks_id' => $item->produks_id,
                     'nama_pembeli' => $request->input('nama_pembeli'),
@@ -83,6 +83,7 @@ class CheckoutController extends Controller
 
         Keranjang::where('users_id', auth()->id())->delete();
 
+        toast('Transaksi Berhasil !!', 'success');
 
         return redirect('/produk');
     }

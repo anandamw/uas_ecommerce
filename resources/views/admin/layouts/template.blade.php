@@ -32,6 +32,8 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
+
     <!-- Begin page -->
     <div id="layout-wrapper">
         <header id="page-topbar">
@@ -989,7 +991,7 @@
         </div>
         <!-- /.modal -->
         <!-- ========== App Menu ========== -->
-      @include('admin.layouts.sidebar')
+        @include('admin.layouts.sidebar')
         <!-- Left Sidebar End -->
         <!-- Vertical Overlay-->
         <div class="vertical-overlay"></div>
@@ -1296,8 +1298,7 @@
                                 <div class="form-check card-radio">
                                     <input class="form-check-input" type="radio" name="data-layout-width"
                                         id="layout-width-boxed" value="boxed" />
-                                    <label class="form-check-label p-0 avatar-md w-100 px-2"
-                                        for="layout-width-boxed">
+                                    <label class="form-check-label p-0 avatar-md w-100 px-2" for="layout-width-boxed">
                                         <span class="d-flex gap-1 h-100 border-start border-end">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">

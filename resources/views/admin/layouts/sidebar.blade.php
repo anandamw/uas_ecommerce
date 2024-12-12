@@ -44,19 +44,16 @@
                     <i class="ri-more-fill"></i>
                     <span data-key="t-pages">Pages</span>
                 </li>
-
-
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/kategori">
-                        <i class="ri-pencil-ruler-2-line"></i>
-                        <span data-key="t-pages">Kategori</span>
+                    <a class="nav-link menu-link" href="/produk">
+                        <i class="ri-shopping-bag-2-line"></i> <!-- Ikon untuk Produks -->
+                        <span data-key="t-advance-ui">Produks</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/produk">
-                        <i class="ri-stack-line"></i>
-
-                        <span data-key="t-advance-ui">Produks</span>
+                    <a class="nav-link menu-link" href="/rekapitulasi">
+                        <i class="ri-bar-chart-box-line"></i> <!-- Ikon untuk Rekapitulasi -->
+                        <span data-key="t-advance-ui">Rekapitulasi</span>
                     </a>
                 </li>
 

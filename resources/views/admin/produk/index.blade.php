@@ -225,7 +225,7 @@
 
                                                 <select class="form-select mb-3" name="jenis_kelamin"
                                                     aria-label="Default select example">
-                                                    <option selected>Open this select menu</option>
+                                                    <option selected disabled>Open this select menu</option>
                                                     <option value="1">Laki-Laki</option>
                                                     <option value="2">Perempuan</option>
                                                 </select>

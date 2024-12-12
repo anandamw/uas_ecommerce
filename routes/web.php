@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\RekapitulasiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,4 +54,5 @@ Route::middleware(['auth', 'userAkses:admin'])->group(function () {
     Route::get('/checkout-detail', [CheckoutController::class, 'details']);
 
     Route::get('/final', [CheckoutController::class, 'final']);
+    Route::get('/rekapitulasi', [RekapitulasiController::class, 'index']);
 });

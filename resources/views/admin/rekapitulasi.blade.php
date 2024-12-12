@@ -24,10 +24,16 @@
                 <div class="row">
                     <!-- Start Table Card -->
                     <div class="col-lg-12">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <input type="text" id="search-input" class="form-control" placeholder="Cari data...">
+                            </div>
+                        </div>
+
                         <div class="card">
                             <div class="card-body">
                                 <!-- Table -->
-                                <table class="table caption-top table-nowrap">
+                                <table class="table caption-top table-nowrap" id="data-table">
                                     <thead class="table-light">
                                         <tr>
                                             <th scope="col">Id</th>
@@ -39,59 +45,68 @@
                                             <th scope="col">Nama Buku</th>
                                             <th scope="col">Harga</th>
                                             <th scope="col">Jumlah</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Total</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         @foreach ($datas as $index => $item)
-                                            <form method="post" action="/update/{{ $item->token_keranjang }}/keranjang">
-                                                @csrf
-                                                <tr>
-                                                    <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $item->nama_pelayan }}</td>
-                                                    <td>{{ $item->nama_pembeli }}</td>
-                                                    <td> {{ $item->jenis_kelamin == '1' ? 'LAKI-LAKI' : ($item->jenis_kelamin == '2' ? 'PEREMPUAN' : 'TIDAK DIKETAHUI') }}
-                                                    </td>
-                                                    <td>{{ $item->alamat }}</td>
-                                                    <td>{{ $item->no_telepon }}</td>
-                                                    <td>{{ $item->judul_buku }}</td>
-
-                                                    <td>Rp, {{ number_format($item->harga) }}</td>
-                                                    <td>{{ $item->quantity }}</td>
-                                                    <td id="total-{{ $index }}">
-                                                        {{ $item->total_harga ?? 'Rp, 0' }}</td>
-
-
-                                                </tr>
-                                            </form>
+                                            <tr>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $item->nama_pelayan }}</td>
+                                                <td>{{ $item->nama_pembeli }}</td>
+                                                <td>{{ $item->jenis_kelamin == '1' ? 'LAKI-LAKI' : ($item->jenis_kelamin == '2' ? 'PEREMPUAN' : 'TIDAK DIKETAHUI') }}
+                                                </td>
+                                                <td>{{ $item->alamat }}</td>
+                                                <td>{{ $item->no_telepon }}</td>
+                                                <td>{{ $item->judul_buku }}</td>
+                                                <td>Rp, {{ number_format($item->harga) }}</td>
+                                                <td>{{ $item->quantity }}</td>
+                                                <td
+                                                    class="{{ $item->status == 'paid' ? 'text-success' : ($item->status == 'unpaid' ? 'text-danger' : 'text-warning') }}">
+                                                    {{ $item->status ?? 'Unknown' }}
+                                                </td>
+                                                <td id="total-{{ $index }}">{{ $item->total_harga ?? 'Rp, 0' }}
+                                                </td>
+                                            </tr>
                                         @endforeach
-
-
                                     </tbody>
                                 </table>
-
-
-                            </div><!-- End Card Body -->
-                            <!-- Total -->
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-sm-1">
-                                        <span class="float-left font-weight-bold">Total:</span>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <span class="float-right font-weight-bold" id="total-price">Rp, 0</span>
-                                    </div>
-                                </div>
                             </div>
-                        </div><!-- End Card -->
-                        <a href="/final?token={{ $_GET['token'] }}" class="btn btn-primary">Submit</a>
-
+                        </div>
 
                     </div><!-- End Col -->
                     <!-- End Table Card -->
 
                 </div><!-- End Row -->
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const searchInput = document.getElementById('search-input');
+                        const tableRows = document.querySelectorAll('#data-table tbody tr');
+
+                        // Event listener untuk input pencarian
+                        searchInput.addEventListener('input', () => {
+                            const searchTerm = searchInput.value
+                                .toLowerCase(); // Ambil nilai pencarian dalam huruf kecil
+
+                            tableRows.forEach(row => {
+                                // Ambil teks dari seluruh kolom pada baris
+                                const rowText = row.textContent
+                                    .toLowerCase(); // Konversi teks dalam baris ke huruf kecil
+
+                                // Jika kata kunci pencarian ada di dalam teks baris, tampilkan baris, jika tidak, sembunyikan
+                                if (rowText.includes(searchTerm)) {
+                                    row.style.display = ''; // Tampilkan baris
+                                } else {
+                                    row.style.display = 'none'; // Sembunyikan baris
+                                }
+                            });
+                        });
+                    });
+                </script>
+
+
                 <script>
                     document.addEventListener('DOMContentLoaded', () => {
                         // Function to calculate the total price
