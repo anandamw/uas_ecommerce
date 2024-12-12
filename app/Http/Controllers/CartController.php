@@ -20,6 +20,8 @@ class CartController extends Controller
             "token_keranjang" => Str::random(9),
             "users_id" => auth()->user()->id,
             "produks_id" => $produk->id,
+            "quantity" => '1',
+            "total_harga" => $produk->harga
         ];
 
 
@@ -29,6 +31,25 @@ class CartController extends Controller
         return redirect('/produk');
     }
 
+
+    public function update(Request $request, $token)
+    {
+        $keranjang = Keranjang::join('produks', 'keranjangs.produks_id', '=', 'produks.id')->where('token_keranjang', $token)->first();
+
+        $total = $keranjang->harga * $request->quantity;
+
+        $data = [
+            "quantity" => $request->quantity,
+            "total_harga" => $total,
+        ];
+
+
+
+        Keranjang::where('token_keranjang', $token)->update($data);
+
+
+        return redirect('/produk');
+    }
 
     public function delete($token)
     {

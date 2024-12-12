@@ -113,35 +113,47 @@
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         @foreach ($carts as $index => $item)
-                                            <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
-                                                <td>{{ $item->judul_buku }}</td>
-                                                <td>{{ $item->penerbit }}</td>
-                                                <td>{{ $item->penulis }}</td>
-                                                <td>
-                                                    <div class="input-step step-primary">
-                                                        <button type="button" class="minus"
-                                                            data-index="{{ $index }}">–</button>
-                                                        <input type="number" class="product-quantity" value="0"
-                                                            min="0" max="100" data-index="{{ $index }}"
-                                                            data-price="{{ $item->harga }}">
-                                                        <button type="button" class="plus"
-                                                            data-index="{{ $index }}">+</button>
-                                                    </div>
-                                                </td>
-                                                <td>Rp, {{ number_format($item->harga) }}</td>
-                                                <td id="total-{{ $index }}">Rp, 0</td>
-                                                <td>
-                                                    <div type="button" class="text-primary" data-bs-toggle="modal"
-                                                        data-bs-target=".bs-example-modal-center">
-                                                        <i class="ri-delete-bin-line"></i>
-                                                        Hapus
-                                                    </div>
-                                                </td>
+                                            <form method="post" action="/update/{{ $item->token_keranjang }}/keranjang">
+                                                @csrf
+                                                <tr>
+                                                    <th scope="row">{{ $loop->iteration }}</th>
+                                                    <td>{{ $item->judul_buku }}</td>
+                                                    <td>{{ $item->penerbit }}</td>
+                                                    <td>{{ $item->penulis }}</td>
+                                                    <td>
+                                                        <div class="input-step step-primary">
+                                                            <button type="button" class="minus"
+                                                                data-index="{{ $index }}">–</button>
+                                                            <input type="number" name="quantity" class="product-quantity"
+                                                                value="{{ $item->quantity ?? '1' }}" min="0"
+                                                                max="100" data-index="{{ $index }}"
+                                                                data-price="{{ $item->harga }}">
+                                                            <button type="button" class="plus"
+                                                                data-index="{{ $index }}">+</button>
+                                                        </div>
+                                                    </td>
+                                                    <td>Rp, {{ number_format($item->harga) }}</td>
+                                                    <td id="total-{{ $index }}">
+                                                        {{ $item->total_harga ?? 'Rp, 0' }}</td>
+                                                    <td>
 
-                                            </tr>
+                                                        <button type="submit" class="btn btn-warning text-white">
+                                                            <i class="ri-edit-line"></i>
+                                                            Update
+                                                        </button>
+                                                        <div type="button" class="text-white btn btn-danger"
+                                                            data-bs-toggle="modal" data-bs-target=".modal-delete">
+                                                            <i class="ri-delete-bin-line"></i>
+                                                            Hapus
+                                                        </div>
+                                                    </td>
+
+
+                                                </tr>
+                                            </form>
                                             <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
                                                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
@@ -153,7 +165,8 @@
                                                             <div class="mt-4">
                                                                 <h4 class="mb-3">Oops something went wrong!</h4>
                                                                 <p class="text-muted mb-4"> The transfer was not
-                                                                    successfully received by us. the email of the recipient
+                                                                    successfully received by us. the email of the
+                                                                    recipient
                                                                     wasn't correct.</p>
                                                                 <div class="hstack gap-2 justify-content-center">
                                                                     <button type="button" class="btn btn-light"
@@ -190,58 +203,65 @@
                     <!-- End Table Card -->
 
                 </div><!-- End Row -->
+                <form method="post" action="/checkout">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
+                                <div class="card-body">
+                                    <div class="live-preview">
+                                        <div class="row gy-4">
+                                            <div class="col-xxl-3 col-md-6">
+                                                <div>
+                                                    <label for="basiInput" class="form-label">Nama Pembeli</label>
+                                                    <input type="text" name="nama_pembeli" class="form-control"
+                                                        id="basiInput" />
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-xxl-3 col-md-6">
+                                                <label for="basiInput" class="form-label">Pilih Jenis Kelamin:</label>
 
-                            <div class="card-body">
-                                <div class="live-preview">
-                                    <div class="row gy-4">
-                                        <div class="col-xxl-3 col-md-6">
-                                            <div>
-                                                <label for="basiInput" class="form-label">Nama Pembeli</label>
-                                                <input type="text" class="form-control" id="basiInput" />
+                                                <select class="form-select mb-3" name="jenis_kelamin"
+                                                    aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">Laki-Laki</option>
+                                                    <option value="2">Perempuan</option>
+                                                </select>
+                                            </div>
+                                            <!--end col-->
+                                            <div class="col-xxl-3 col-md-6">
+                                                <div>
+                                                    <label for="basiInput" class="form-label">Alamat</label>
+                                                    <input type="text" class="form-control" name="alamat"
+                                                        id="basiInput" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-3 col-md-6">
+                                                <div>
+                                                    <label for="basiInput" class="form-label">No Telepon</label>
+                                                    <input type="text" class="form-control" name="no_telepon"
+                                                        id="basiInput" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-3 col-md-6">
+                                                <h6 id="total-harga">Total Harga: 0</h6>
                                             </div>
                                         </div>
-                                        <!--end col-->
-                                        <div class="col-xxl-3 col-md-6">
-                                            <label for="basiInput" class="form-label">Pilih Jenis Kelamin:</label>
-
-                                            <select class="form-select mb-3" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value="1">Laki-Laki</option>
-                                                <option value="2">Perempuan</option>
-                                            </select>
-                                        </div>
-                                        <!--end col-->
-                                        <div class="col-xxl-3 col-md-6">
-                                            <div>
-                                                <label for="basiInput" class="form-label">Alamat</label>
-                                                <input type="text" class="form-control" id="basiInput" />
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-3 col-md-6">
-                                            <div>
-                                                <label for="basiInput" class="form-label">No Telepon</label>
-                                                <input type="text" class="form-control" id="basiInput" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xxl-3 col-md-6">
-                                            <h6 id="total-harga">Total Harga: 0</h6>
-                                        </div>
+                                        <!--end row-->
                                     </div>
-                                    <!--end row-->
-                                </div>
 
+                                </div>
                             </div>
+                            <button type="submit" class="btn btn-primary">Bayar Cash</button>
+                            <a href="" class="btn btn-warning">Bayar QRIS</a>
                         </div>
-                        <a href="" class="btn btn-primary">Bayar Cash</a>
-                        <a href="" class="btn btn-warning">Bayar QRIS</a>
+                        <!--end col-->
                     </div>
-                    <!--end col-->
-                </div>
+                </form>
+
 
             </div><!-- End Container Fluid -->
         </div><!-- End Page Content -->
@@ -287,7 +307,7 @@
                 button.addEventListener("click", function() {
                     const index = this.getAttribute("data-index");
                     const input = document.querySelector(
-                    `.product-quantity[data-index="${index}"]`);
+                        `.product-quantity[data-index="${index}"]`);
 
                     if (this.classList.contains("plus")) {
                         input.stepUp();
@@ -356,89 +376,4 @@
             });
         });
     </script>
-
-    {{-- <script>
-        $(document).ready(function() {
-            // Tombol minus
-            $('.minus').on('click', function() {
-                var $input = $(this).siblings('.product-quantity'); // Cari input yang terkait dengan tombol
-                var value = parseInt($input.val(), 10); // Ambil nilai saat ini dari input
-                if (value > 0) { // Jika nilai lebih dari 0
-                    $input.val(value - 1); // Kurangi nilai
-                }
-            });
-
-            // Tombol plus
-            $('.plus').on('click', function() {
-                var $input = $(this).siblings('.product-quantity'); // Cari input yang terkait dengan tombol
-                var value = parseInt($input.val(), 10); // Ambil nilai saat ini dari input
-                if (value < 100) { // Jika nilai kurang dari 100
-                    $input.val(value + 1); // Tambah nilai
-                }
-            });
-
-            // Mengubah nilai dengan memasukkan angka manual
-            $('.product-quantity').on('input', function() {
-                var value = parseInt($(this).val(), 10);
-                if (value < 0) {
-                    $(this).val(0); // Jika nilai kurang dari 0, atur ke 0
-                } else if (value > 100) {
-                    $(this).val(100); // Jika nilai lebih dari 100, atur ke 100
-                }
-            });
-        });
-    </script> --}}
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const plusButtons = document.querySelectorAll('.plus');
-            const minusButtons = document.querySelectorAll('.minus');
-            const quantityInputs = document.querySelectorAll('.product-quantity');
-
-            // Function to update the total for each item
-            function updateTotal(index) {
-                const quantity = parseInt(quantityInputs[index].value) || 0; // Get quantity, default to 0 if NaN
-                const price = parseInt(quantityInputs[index].getAttribute(
-                    'data-price')); // Get price from data attribute
-                const totalElement = document.getElementById(`total-${index}`);
-
-                if (isNaN(price)) {
-                    console.error("Invalid price value:", price);
-                    return;
-                }
-
-                const total = quantity * price; // Calculate total
-                totalElement.innerText = `Rp, ${total.toLocaleString()}`; // Update total with formatted price
-            }
-
-            // Add event listeners for the plus and minus buttons
-            plusButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = this.getAttribute('data-index'); // Get the index of the row
-                    const quantityInput = document.querySelectorAll('.product-quantity')[index];
-                    let quantity = parseInt(quantityInput.value) || 0;
-                    quantityInput.value = quantity + 1;
-                    updateTotal(index); // Update total after increment
-                });
-            });
-
-            minusButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const index = this.getAttribute('data-index'); // Get the index of the row
-                    const quantityInput = document.querySelectorAll('.product-quantity')[index];
-                    let quantity = parseInt(quantityInput.value) || 0;
-                    if (quantity > 0) {
-                        quantityInput.value = quantity - 1;
-                    }
-                    updateTotal(index); // Update total after decrement
-                });
-            });
-
-            // Add event listener for input quantity change
-            quantityInputs.forEach((input, index) => {
-                input.addEventListener('input', function() {
-                    updateTotal(index); // Update total when quantity is changed manually
-                });
-            });
-        });
-    </script> --}}
 @endsection

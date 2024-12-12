@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'userAkses:admin'])->group(function () {
         return view('admin.dashboard');
     });
     Route::get('/keranjang/{token}', [CartController::class, 'cart']);
+    Route::post('/update/{token}/keranjang', [CartController::class, 'update']);
     Route::get('/keranjang/hapus/{token}', [CartController::class, 'delete']);
 
     Route::get('/produk', [ProdukController::class, 'index']);
@@ -46,4 +48,9 @@ Route::middleware(['auth', 'userAkses:admin'])->group(function () {
     Route::get('/produk/{id}/delete', [ProdukController::class, 'delete']);
 
     Route::get('/pages', [HomeController::class, 'index']);
+
+    Route::post('/checkout', [CheckoutController::class, 'checkout']);
+    Route::get('/checkout-detail', [CheckoutController::class, 'details']);
+
+    Route::get('/final', [CheckoutController::class, 'final']);
 });

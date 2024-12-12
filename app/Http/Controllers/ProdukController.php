@@ -88,7 +88,7 @@ class ProdukController extends Controller
         ]);
 
         // Cari produk berdasarkan ID
-        $produk = Produk::findOrFail($id);  // Jika produk tidak ditemukan, akan memunculkan 404
+        $produk = Produk::findOrFail($id);
 
         // Menangani file foto buku (jika ada)
         if ($request->hasFile('foto_buku')) {

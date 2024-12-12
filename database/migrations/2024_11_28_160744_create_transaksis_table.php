@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->string('token_customer');
-            $table->string('nama_pembeli');
-            $table->string('jenis_kelamin');
-            $table->string('alamat');
-            $table->string('no_telepon');
-            $table->string('nama_buku');
-            $table->string('quantity');
-            $table->string('total_harga');
+            $table->string('token_customer')->nullable();
+            $table->string('nama_pelayan')->nullable();
+            $table->string('nama_pembeli')->nullable();
+            $table->string('jenis_kelamin')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('no_telepon')->nullable();
+            $table->foreignId('produks_id')->constrained()->onDelete('cascade');
+            $table->string('quantity')->nullable();
+            $table->string('total_harga')->nullable();
+            $table->enum('status', ['unpaid', 'paid'])->defaultValue('unpaid');;
 
             $table->timestamps();
         });

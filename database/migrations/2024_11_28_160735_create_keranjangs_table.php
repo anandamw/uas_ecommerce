@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('token_keranjang');
             $table->foreignId('users_id');
+            $table->string('quantity')->nullable();
+            $table->string('total_harga')->nullable();
             $table->foreignId('produks_id');
             $table->timestamps();
         });
