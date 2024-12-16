@@ -85,7 +85,8 @@
                                 </div>
                             </div>
                         </div><!-- End Card -->
-                        <a href="/final?token={{ $_GET['token'] }}" class="btn btn-primary">Submit</a>
+                        <a href="/final?token={{ $_GET['token'] }}" class="btn btn-primary">Bayar Tunai</a>
+                        <a href="/final?token={{ $_GET['token'] }}" class="btn btn-warning">Bayar Digital</a>
 
 
                     </div><!-- End Col -->

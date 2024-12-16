@@ -9,10 +9,10 @@
     <meta name="keywords" content="Fastkart">
     <meta name="author" content="Fastkart">
     <link rel="icon" href="{{asset("")}}assets_user/images/favicon/7.png" type="image/x-icon">
-    <title>CODEXSTORE</title>
+    <title>Dashboard</title>
 
 
-    
+
 
     <!-- Google font -->
 
@@ -107,12 +107,12 @@
                     <img src="{{asset("")}}assets_user/images/cookie-bar.png" class="blur-up lazyload" alt="">
                     <h2>Cookies!</h2>
                 </div>
-    
+
                 <div class="cookie-contain">
                     <h5 class="text-content">We use cookies to make your experience better</h5>
                 </div>
             </div>
-    
+
             <div class="button-group">
                 <button class="btn privacy-button">Privacy Policy</button>
                 <button class="btn ok-button">OK</button>
@@ -136,12 +136,12 @@
                     alt=""
                   />
                 </div>
-  
+
                 <div class="service-detail">
                   <h5 style="color: aliceblue">Produk Uptodate</h5>
                 </div>
               </div>
-  
+
               <div class="service-box">
                 <div class="service-image">
                   <img
@@ -150,12 +150,12 @@
                     alt=""
                   />
                 </div>
-  
+
                 <div class="service-detail">
                   <h5 style="color: aliceblue">Pengiriman Aman</h5>
                 </div>
               </div>
-  
+
               <div class="service-box">
                 <div class="service-image">
                   <img
@@ -164,12 +164,12 @@
                     alt=""
                   />
                 </div>
-  
+
                 <div class="service-detail">
                   <h5 style="color: aliceblue">Harga Terjangkau</h5>
                 </div>
               </div>
-  
+
               <div class="service-box">
                 <div class="service-image">
                   <img
@@ -178,13 +178,13 @@
                     alt=""
                   />
                 </div>
-  
+
                 <div class="service-detail">
                   <h5 style="color: aliceblue">E-Comerce Termurah</h5>
                 </div>
               </div>
             </div>
-  
+
             <div class="row g-md-4 gy-sm-5">
               <div class="col-xxl-3 col-xl-4 col-sm-6">
                 <a href="index.html" class="foot-logo theme-logo">
@@ -236,7 +236,7 @@
                   </li>
                 </ul>
               </div>
-  
+
               <div class="col-xxl-2 col-xl-4 col-sm-6">
                 <div class="footer-title">
                   <h4 class="text-white">About Codexstore</h4>
@@ -253,7 +253,7 @@
                   </li>
                 </ul>
               </div>
-  
+
               <div class="col-xxl-2 col-xl-4 col-sm-6">
                 <div class="footer-title">
                   <h4 class="text-white">Useful Link</h4>
@@ -276,7 +276,7 @@
                   </li>
                 </ul>
               </div>
-  
+
               <div class="col-xxl-3 col-xl-4 col-sm-6">
                 <div class="footer-title">
                   <h4 class="text-white">Store information</h4>
@@ -290,7 +290,7 @@
                       </div>
                     </a>
                   </li>
-  
+
                   <li>
                     <a
                       href="https://www.whatsapp.com/?lang=id_ID"
@@ -302,7 +302,7 @@
                       </div>
                     </a>
                   </li>
-  
+
                   <li>
                     <a
                       href="https://workspace.google.com/intl/id/gmail/"
@@ -318,7 +318,7 @@
               </div>
             </div>
           </div>
-  
+
           <div class="sub-footer sub-footer-lite section-b-space section-t-space">
             <div class="left-footer">
               <p class="light-text">
@@ -343,7 +343,7 @@
                 >
               </p>
             </div>
-  
+
             <ul class="payment-box">
               <li>
                 <img
@@ -385,14 +385,14 @@
         </div>
       </footer>
       <!-- Footer Section End -->
-  
+
       <!-- Tap to top and theme setting button start -->
       <div class="theme-option">
         <div class="setting-box">
           <button class="btn setting-button">
             <i class="fa-solid fa-gear"></i>
           </button>
-  
+
           <div class="theme-setting-2">
             <div class="theme-box">
               <ul>
@@ -419,7 +419,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="back-to-top">
           <a id="back-to-top" href="#">
             <i class="fas fa-chevron-up"></i>
@@ -427,58 +427,58 @@
         </div>
       </div>
       <!-- Tap to top and theme setting button end -->
-  
+
       <!-- Bg overlay Start -->
       <div class="bg-overlay"></div>
       <!-- Bg overlay End -->
-  
+
       <!-- latest jquery-->
       <script src="{{asset("")}}assets_user/js/jquery-3.6.0.min.js"></script>
-  
+
        <!-- Lord-icon Js -->
        <script src="{{asset("")}}assets_user/js/lusqsztk.js"></script>
-  
-  
+
+
       <!-- jquery ui-->
       <script src="{{asset("")}}assets_user/js/jquery-ui.min.js"></script>
-  
+
       <!-- Bootstrap js-->
       <script src="{{asset("")}}assets_user/js/bootstrap/bootstrap.bundle.min.js"></script>
       <script src="{{asset("")}}assets_user/js/bootstrap/bootstrap-notify.min.js"></script>
       <script src="{{asset("")}}assets_user/js/bootstrap/popper.min.js"></script>
-  
+
       <!-- feather icon js-->
       <script src="{{asset("")}}assets_user/js/feather/feather.min.js"></script>
       <script src="{{asset("")}}assets_user/js/feather/feather-icon.js"></script>
-  
+
       <!-- Delivery Option js -->
       <script src="{{asset("")}}assets_user/js/delivery-option.js"></script>
-  
+
       <!-- Lazyload Js -->
       <script src="{{asset("")}}assets_user/js/lazysizes.min.js"></script>
-  
+
       <!-- Slick js-->
       <script src="{{asset("")}}assets_user/js/slick/slick.js"></script>
       <script src="{{asset("")}}assets_user/js/slick/slick-animation.min.js"></script>
       <script src="{{asset("")}}assets_user/js/slick/custom_slick.js"></script>
       <script src="{{asset("")}}assets_user/js/custom-slick-animated.js"></script>
-  
+
       <!-- Quantity js -->
       <script src="{{asset("")}}assets_user/js/quantity.js"></script>
       <script src="{{asset("")}}assets_user/js/quantity-2.js"></script>
-  
+
         <!-- Price Range Js -->
         <script src="{{asset("")}}assets_user/js/ion.rangeSlider.min.js"></script>
-  
+
         <!-- sidebar open js -->
         <script src="{{asset("")}}assets_user/js/filter-sidebar.js"></script>
-    
-      
+
+
       <!-- script js -->
       <script src="{{asset("")}}assets_user/js/script.js"></script>
-  
+
       <!-- theme setting js -->
       <script src="{{asset("")}}assets_user/js/theme-setting.js"></script>
     </body>
   </html>
-  
+

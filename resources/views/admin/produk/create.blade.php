@@ -11,17 +11,13 @@
                 @csrf
                 <div class="modal-body">
 
-                    <!-- Input Nama Kategori -->
+                    <!-- Input Judul Buku -->
                     <div class="mb-3">
-                        <label for="kategoris_id" class="form-label">Kategori</label>
-                        <select id="kategoris_id" name="kategoris_id" class="form-control" required>
-                            <option value="" disabled selected>Pilih Kategori</option>
-                            @foreach ($kategoris as $kategori)
-                                <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
-                            @endforeach
-                        </select>
+                        <label for="supliyers" class="form-label">Nama Supliyer</label>
+                        <input type="text" id="supliyers" name="supliyers" class="form-control"
+                            placeholder="Masukkan Nama Supliyers" required />
                         <div class="invalid-feedback">
-                            Silakan pilih kategori.
+                            Silakan masukkan nama supliyers
                         </div>
                     </div>
 
@@ -75,13 +71,13 @@
                         </div>
                     </div>
 
-                    <!-- Input Deskripsi -->
+                    <!-- Input stok -->
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Deskripsi Buku</label>
-                        <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4" placeholder="Masukkan Deskripsi Buku"
-                            required></textarea>
+                        <label for="stok" class="form-label">Stok</label>
+                        <input type="number" id="stok" name="stok" class="form-control"
+                            placeholder="Masukkan stok Buku" required />
                         <div class="invalid-feedback">
-                            Silakan masukkan deskripsi buku.
+                            Silakan masukkan stok buku.
                         </div>
                     </div>
 

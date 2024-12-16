@@ -20,7 +20,7 @@
                 <h1 class="text-uppercase">
                   Stay home & delivered your
                   <span class="daily">Book Needs</span>
-                </h1>
+                      </h1>
                 <p class="w-75 d-none d-sm-block">
                     Dengan membaca, kita menanam benih pengetahuan yang kelak akan berbuah di masa depan dengan bahagia.
                 </p>

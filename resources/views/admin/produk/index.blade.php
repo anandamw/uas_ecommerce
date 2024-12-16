@@ -26,12 +26,17 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Cari Produk</h4>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Tambah
+                                    Produk</button>
+
+                                @include('admin.produk.create')
+
                             </div><!-- End Card Header -->
                             <div class="card-body">
                                 <div class="row g-4 mb-3">
                                     <div class="col-sm">
-                                        <div class="d-flex justify-content-sm-end">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="card-title mb-0">Cari Produk</h4>
                                             <div class="search-box ms-2">
                                                 <input type="text" class="form-control search" id="searchInput"
                                                     placeholder="Search...">
@@ -68,11 +73,52 @@
                                                 <td>{{ $item->stok }}</td>
                                                 <td>Rp, {{ $item->harga }}</td>
                                                 <td>
-                                                    <i class="ri-shopping-cart-fill"></i>
-                                                    <a href="/keranjang/{{ $item->token_produks }}">Keranjang</a>
+                                                    <a href="/keranjang/{{ $item->token_produks }}" class="btn btn-primary">
+                                                        <i class="ri-shopping-cart-fill"></i>
+                                                        Keranjang</a>
+                                                    {{-- href="/produk/{{ $item->token_produks }}/update" --}}
+                                                    <button class="btn btn-warning" data-bs-toggle="modal"
+                                                        data-bs-target="#showModal{{ $item->id }}">
+                                                        <i class="ri-shopping-cart-fill"></i>
+                                                        Edit</button>
+                                                    {{-- href="/produk/{{ $item->token_produks }}/delete" --}}
+                                                    <button class="btn btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#modalHapus{{ $item->id }}">
+                                                        <i class="ri-shopping-cart-fill"></i>
+                                                        Hapus</button>
+
+                                                    <!-- Modal Hapus -->
+                                                    <div class="modal fade" id="modalHapus{{ $item->id }}"
+                                                        tabindex="-1" aria-labelledby="modalHapusLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="modalHapusLabel">Konfirmasi
+                                                                        Hapus</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-justify w-5">
+                                                                    Apakah Anda yakin ingin menghapus produk
+                                                                    <strong>{{ $item->judul_buku }}</strong> dari supliyer
+                                                                    <strong>{{ $item->supliyers }}</strong>?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Batal</button>
+
+                                                                    <a href="/produk/{{ $item->id }}/delete"
+                                                                        type="submit" class="btn btn-danger">Hapus</a>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </td>
                                             </tr>
-                                            <!-- Default Modals -->
+
+                                            @include('admin.produk.edit')
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -127,7 +173,8 @@
                                                         <div class="input-step step-primary">
                                                             <button type="button" class="minus"
                                                                 data-index="{{ $index }}">–</button>
-                                                            <input type="number" name="quantity" class="product-quantity"
+                                                            <input type="number" name="quantity"
+                                                                class="product-quantity"
                                                                 value="{{ $item->quantity ?? '1' }}" min="0"
                                                                 max="100" data-index="{{ $index }}"
                                                                 data-price="{{ $item->harga }}">
@@ -255,8 +302,7 @@
 
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Bayar Cash</button>
-                            <a href="" class="btn btn-warning">Bayar QRIS</a>
+                            <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
                         </div>
                         <!--end col-->
                     </div>

@@ -183,7 +183,8 @@
                                                 <i class="bx bxs-star text-warning"></i>
                                             </p>
                                             <h5 class="my-0"><span class="text-muted me-2"><del>$500</del></span>
-                                                <b>$450</b></h5>
+                                                <b>$450</b>
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +208,8 @@
                                                 <i class="bx bxs-star"></i>
                                             </p>
                                             <h5 class="my-0"><span class="text-muted me-2"><del>$240</del></span>
-                                                <b>$225</b></h5>
+                                                <b>$225</b>
+                                            </h5>
 
                                         </div>
                                     </div>
@@ -237,7 +239,8 @@
                                                 <i class="bx bxs-star"></i>
                                             </p>
                                             <h5 class="my-0"><span class="text-muted me-2"><del>$175</del></span>
-                                                <b>$152</b></h5>
+                                                <b>$152</b>
+                                            </h5>
 
                                         </div>
                                     </div>
@@ -262,7 +265,8 @@
                                                 <i class="bx bxs-star"></i>
                                             </p>
                                             <h5 class="my-0"><span class="text-muted me-2"><del>$150</del></span>
-                                                <b>$145</b></h5>
+                                                <b>$145</b>
+                                            </h5>
 
                                         </div>
                                     </div>
@@ -293,7 +297,8 @@
                                                 <i class="bx bxs-star"></i>
                                             </p>
                                             <h5 class="my-0"><span class="text-muted me-2"><del>$145</del></span>
-                                                <b>$138</b></h5>
+                                                <b>$138</b>
+                                            </h5>
                                         </div>
                                     </div>
                                 </div>
@@ -322,7 +327,8 @@
                                                 <i class="bx bxs-star"></i>
                                             </p>
                                             <h5 class="my-0"><span class="text-muted me-2"><del>$138</del></span>
-                                                <b>$135</b></h5>
+                                                <b>$135</b>
+                                            </h5>
 
                                         </div>
                                     </div>
@@ -348,21 +354,6 @@
         <!-- End Page-content -->
 
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script> © Skote.
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="text-sm-end d-none d-sm-block">
-                            Design & Develop by Themesbrand
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+
     </div>
 @endsection
