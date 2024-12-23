@@ -45,15 +45,28 @@
                     <span data-key="t-pages">Pages</span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/produk">
+                    <a class="nav-link menu-link" href="/kasir">
                         <i class="ri-shopping-bag-2-line"></i> <!-- Ikon untuk Produks -->
-                        <span data-key="t-advance-ui">Produks</span>
+                        <span data-key="t-advance-ui">Kasir</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="/rekapitulasi">
                         <i class="ri-bar-chart-box-line"></i> <!-- Ikon untuk Rekapitulasi -->
                         <span data-key="t-advance-ui">Rekapitulasi</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/produk">
+                        <i class="ri-bar-chart-box-line"></i> <!-- Ikon untuk Barang -->
+                        <span data-key="t-advance-ui">Produk Saya</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="/notifikasi">
+                        <i class="ri-bar-chart-box-line"></i> <!-- Ikon untuk Barang -->
+                        <span data-key="t-advance-ui">Notifikasi</span>
                     </a>
                 </li>
 

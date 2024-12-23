@@ -85,6 +85,6 @@ class CheckoutController extends Controller
 
         toast('Transaksi Berhasil !!', 'success');
 
-        return redirect('/produk');
+        return redirect('/kasir');
     }
 }

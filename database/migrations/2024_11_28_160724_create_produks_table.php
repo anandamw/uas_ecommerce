@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('halaman');
             $table->string('bahasa');
             $table->string('stok');
+            $table->string('harga_beli');
+
             $table->string('harga');
-            $table->string('foto_buku');
             $table->timestamps();
         });
     }

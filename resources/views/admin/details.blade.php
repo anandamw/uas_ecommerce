@@ -61,17 +61,12 @@
                                                     <td>{{ $item->quantity }}</td>
                                                     <td id="total-{{ $index }}">
                                                         {{ $item->total_harga ?? 'Rp, 0' }}</td>
-
-
                                                 </tr>
                                             </form>
                                         @endforeach
-
-
                                     </tbody>
+                                    
                                 </table>
-
-
                             </div><!-- End Card Body -->
                             <!-- Total -->
                             <div class="card-footer">

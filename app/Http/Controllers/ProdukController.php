@@ -34,17 +34,11 @@ class ProdukController extends Controller
             'bahasa' => 'required|string|max:100',
             'stok' => 'required|string|max:100',
             'harga' => 'required|numeric',
-            'foto_buku' => 'required|image|mimes:jpeg,png,jpg|max:2048',  // Validasi untuk foto
+            'harga_beli' => 'required|numeric',
         ]);
         // dd($request->all());
-        // Menangani file foto buku
-        $file = $request->file('foto_buku');
+        $token = strtoupper(Str::random(1)) . '-' . mt_rand(10000, 99999);
 
-        // Membuat token untuk nama file
-        $token = Str::random(10);
-
-        // Membuat nama file baru dengan ekstensi yang sesuai
-        $filePath = $token . '__foto_buku.' . $file->getClientOriginalExtension();
 
         // Menyimpan data produk ke database
         Produk::create([
@@ -57,14 +51,12 @@ class ProdukController extends Controller
             'bahasa' => $request->bahasa,
             'stok' => $request->stok,
             'harga' => $request->harga,
-            'foto_buku' => $filePath,  // Menyimpan nama file yang baru
+            'harga_beli' => $request->harga_beli,
         ]);
 
-        // Pindahkan file foto ke folder publik
-        $file->move(public_path('foto_buku'), $filePath);
 
         // Redirect kembali dengan pesan sukses
-        return redirect('/produk');
+        return redirect('/kasir');
     }
 
     public function update(Request $request, $id)
@@ -74,30 +66,11 @@ class ProdukController extends Controller
         // Cari produk berdasarkan ID
         $produk = Produk::findOrFail($id);
 
-        // Menangani file foto buku (jika ada)
-        if ($request->hasFile('foto_buku')) {
-            $file = $request->file('foto_buku');
+        $token = strtoupper(Str::random(1)) . '-' . mt_rand(10000, 99999);
 
-            // Membuat token untuk nama file
-            $token = Str::random(10);
-
-            // Membuat nama file baru dengan ekstensi yang sesuai
-            $filePath = $token . '__foto_buku.' . $file->getClientOriginalExtension();
-
-            // Pindahkan file foto ke folder publik
-            $file->move(public_path('foto_buku'), $filePath);
-
-            // Update foto buku dengan foto baru
-            $produk->foto_buku = $filePath;
-        } else {
-            // Jika tidak ada file foto baru, cek apakah foto lama ada
-            if (! $produk->foto_buku) {
-                // Jika foto lama tidak ada, maka tentukan foto default atau kosongkan
-                $produk->foto_buku = 'default_foto_buku.jpg'; // Gunakan foto default atau kosongkan sesuai kebutuhan
-            }
-        }
 
         // Update data produk lainnya tanpa mengganti foto (hanya jika foto tidak diubah)
+        $produk->token_produks = $token;
         $produk->judul_buku = $request->judul_buku;
         $produk->penerbit = $request->penerbit;
         $produk->penulis = $request->penulis;
@@ -106,12 +79,14 @@ class ProdukController extends Controller
         $produk->supliyers = $request->supliyers;
         $produk->stok = $request->stok;
         $produk->harga = $request->harga;
+        $produk->harga_beli = $request->harga_beli;
+
 
         // Simpan perubahan ke database
         $produk->save();
 
         // Redirect kembali dengan pesan sukses
-        return redirect('/produk');
+        return redirect('/kasir');
     }
 
     public function delete($id)
@@ -119,20 +94,30 @@ class ProdukController extends Controller
         // Cari produk berdasarkan ID
         $produk = Produk::findOrFail($id);  // Jika produk tidak ditemukan, akan memunculkan 404
 
-        // Cek apakah ada foto yang terkait dengan produk ini
-        if ($produk->foto_buku && $produk->foto_buku != 'default_foto_buku.jpg') {
-            // Menghapus file foto buku dari server
-            $filePath = public_path('foto_buku/' . $produk->foto_buku);
-            if (file_exists($filePath)) {
-                unlink($filePath);  // Hapus file foto
-            }
-        }
-
         // Hapus data produk dari database
         $produk->delete();
         toast('Berhasil Hapus Data !!', 'success');
 
         // Redirect dengan pesan sukses
-        return redirect('/produk');
+        return redirect('/kasir');
+    }
+
+    public function detail()
+    {
+
+        $data = [
+            'produks' => Produk::all(),
+            // 'carts' => Keranjang::JoinKeranjang(),
+        ];
+
+        return view('admin.produk.detail', $data);
+    }
+
+    public function notif()
+    {
+        $produks = Produk::notification();
+
+
+        return view('admin.produk.notif', compact('produks'));
     }
 }

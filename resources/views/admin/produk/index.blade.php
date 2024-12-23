@@ -59,6 +59,7 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th scope="col">Id</th>
+                                            <th scope="col">Kode Barang</th>
                                             <th scope="col">Nama Buku</th>
                                             <th scope="col">Jumlah Buku</th>
                                             <th scope="col">Harga</th>
@@ -69,6 +70,7 @@
                                         @foreach ($produks as $item)
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $item->token_produks }}</td>
                                                 <td>{{ $item->judul_buku }}</td>
                                                 <td>{{ $item->stok }}</td>
                                                 <td>Rp, {{ $item->harga }}</td>
@@ -150,6 +152,7 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th scope="col">Id</th>
+                                            <th scope="col">Kode Barang</th>
                                             <th scope="col">Nama Buku</th>
                                             <th scope="col">Penerbit</th>
                                             <th scope="col">Penulis</th>
@@ -166,6 +169,7 @@
                                                 @csrf
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
+                                                    <td>{{ $item->token_produks }}</td>
                                                     <td>{{ $item->judul_buku }}</td>
                                                     <td>{{ $item->penerbit }}</td>
                                                     <td>{{ $item->penulis }}</td>

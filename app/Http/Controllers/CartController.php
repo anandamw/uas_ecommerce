@@ -28,7 +28,7 @@ class CartController extends Controller
         Keranjang::create($data);
 
 
-        return redirect('/produk');
+        return redirect('/kasir');
     }
 
 
@@ -48,12 +48,12 @@ class CartController extends Controller
         Keranjang::where('token_keranjang', $token)->update($data);
 
 
-        return redirect('/produk');
+        return redirect('/kasir');
     }
 
     public function delete($token)
     {
         Keranjang::where('token_keranjang', $token)->delete();
-        return redirect('/produk');
+        return redirect('/kasir');
     }
 }

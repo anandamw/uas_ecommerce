@@ -6,7 +6,6 @@ use App\Models\Produk;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProdukSeeder extends Seeder
 {
@@ -15,49 +14,24 @@ class ProdukSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
-            [
-                'token_produks' => Str::uuid(),
-                'judul_buku' => 'Pemrograman Laravel Dasar',
-                'penerbit' => 'Penerbit Teknologi',
-                'penulis' => 'Nanda Teknologi',
-                'halaman' => 250,
-                'bahasa' => 'Indonesia',
-                'harga' => 120000,
-                'stok' => 35,
-                'foto_buku' => 'laravel_dasar.jpg',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
+        $data = [];
 
-                'token_produks' => Str::uuid(),
-                'judul_buku' => 'Belajar Python untuk Data Science',
-                'penerbit' => 'Data World',
-                'penulis' => 'Adi Wijaya',
-                'halaman' => 320,
-                'bahasa' => 'Indonesia',
-                'stok' => 12,
-                'harga' => 150000,
-                'foto_buku' => 'python_datascience.jpg',
+        for ($i = 0; $i < 20; $i++) {
+            $data[] = [
+                'token_produks' => strtoupper(Str::random(1)) . '-' . mt_rand(10000, 99999),
+                'judul_buku' => 'Judul Buku ' . ($i + 1),
+                'penerbit' => 'Penerbit ' . ($i + 1),
+                'penulis' => 'Penulis ' . ($i + 1),
+                'halaman' => mt_rand(100, 500),
+                'bahasa' => $i % 2 == 0 ? 'Indonesia' : 'English',
+                'harga' => mt_rand(50000, 300000),
+                'harga_beli' => mt_rand(50000, 300000),
+                'stok' => mt_rand(10, 100),
+                'supliyers' => 'Supliyer ' . ($i + 1),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ],
-            [
-
-                'token_produks' => Str::uuid(),
-                'judul_buku' => 'Mastering React',
-                'penerbit' => 'CodePress',
-                'penulis' => 'John Doe',
-                'halaman' => 280,
-                'bahasa' => 'English',
-                'stok' => 45,
-                'harga' => 200000,
-                'foto_buku' => 'mastering_react.jpg',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-        ];
+            ];
+        }
 
         foreach ($data as $item) {
             Produk::create($item);

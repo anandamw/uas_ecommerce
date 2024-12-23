@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     id="close-modal"></button>
             </div>
-            <form action="/produk/store" method="POST" class="tablelist-form" enctype="multipart/form-data"
+            <form action="/kasir/store" method="POST" class="tablelist-form" enctype="multipart/form-data"
                 autocomplete="off">
                 @csrf
                 <div class="modal-body">
@@ -91,15 +91,17 @@
                         </div>
                     </div>
 
-                    <!-- Input Foto Buku -->
+                    <!-- Input Harga -->
                     <div class="mb-3">
-                        <label for="foto_buku" class="form-label">Foto Buku</label>
-                        <input type="file" id="foto_buku" name="foto_buku" class="form-control" accept="image/*"
-                            required />
+                        <label for="harga_beli" class="form-label">Harga Beli</label>
+                        <input type="number" id="harga_beli" name="harga_beli" class="form-control"
+                            placeholder="Masukkan Harga Beli Buku" required />
                         <div class="invalid-feedback">
-                            Silakan unggah foto buku.
+                            Silakan masukkan Harga Beli buku.
                         </div>
                     </div>
+
+
                 </div>
 
                 <div class="modal-footer">

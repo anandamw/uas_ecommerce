@@ -8,7 +8,7 @@
                     id="close-modal"></button>
             </div>
 
-            <form action="/produk/{{ $item->id }}/update" method="POST" class="tablelist-form"
+            <form action="/kasir/{{ $item->id }}/update" method="POST" class="tablelist-form"
                 enctype="multipart/form-data" autocomplete="off">
                 @csrf
                 <div class="modal-body">
@@ -93,20 +93,17 @@
                         </div>
                     </div>
 
-                    <!-- Input Foto Buku -->
+                    <!-- Input Harga -->
                     <div class="mb-3">
-                        <label for="foto_buku" class="form-label">Foto Buku</label>
-                        <input type="file" id="foto_buku" name="foto_buku" class="form-control"
-                            accept="image/*" />
-                        <small class="text-muted">Kosongkan jika tidak ingin mengubah foto buku.</small>
-                        <div class="mt-3">
-                            <img src="{{ asset('foto_buku/' . $item->foto_buku) }}" alt="Foto Buku"
-                                class="img-fluid" style="max-width: 150px;">
-                        </div>
+                        <label for="harga_beli" class="form-label">Harga Beli</label>
+                        <input type="number" id="harga_beli" name="harga_beli" value="{{ $item->harga_beli }}"
+                            class="form-control" placeholder="Masukkan Harga Beli Buku" required />
                         <div class="invalid-feedback">
-                            Silakan unggah foto buku.
+                            Silakan masukkan Harga Beli buku.
                         </div>
                     </div>
+
+
                 </div>
 
                 <div class="modal-footer">

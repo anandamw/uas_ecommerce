@@ -66,7 +66,7 @@
                                                     class="{{ $item->status == 'paid' ? 'text-success' : ($item->status == 'unpaid' ? 'text-danger' : 'text-warning') }}">
                                                     {{ $item->status ?? 'Unknown' }}
                                                 </td>
-                                                <td id="total-{{ $index }}">{{ $item->total_harga ?? 'Rp, 0' }}
+                                                <td>Rp,{{ number_format($item->total_harga, 0, ',', '.') }}
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -43,10 +43,10 @@ Route::middleware(['auth', 'userAkses:admin'])->group(function () {
     Route::post('/update/{token}/keranjang', [CartController::class, 'update']);
     Route::get('/keranjang/hapus/{token}', [CartController::class, 'delete']);
 
-    Route::get('/produk', [ProdukController::class, 'index']);
-    Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
-    Route::post('/produk/store', [ProdukController::class, 'store']);
-    Route::get('/produk/{id}/delete', [ProdukController::class, 'delete']);
+    Route::get('/kasir', [ProdukController::class, 'index']);
+    Route::post('/kasir/{id}/update', [ProdukController::class, 'update']);
+    Route::post('/kasir/store', [ProdukController::class, 'store']);
+    Route::get('/kasir/{id}/delete', [ProdukController::class, 'delete']);
 
     Route::get('/pages', [HomeController::class, 'index']);
 
@@ -55,4 +55,7 @@ Route::middleware(['auth', 'userAkses:admin'])->group(function () {
 
     Route::get('/final', [CheckoutController::class, 'final']);
     Route::get('/rekapitulasi', [RekapitulasiController::class, 'index']);
+
+    Route::get('/produk', [ProdukController::class, 'detail']);
+    Route::get('/notifikasi', [ProdukController::class, 'notif']);
 });
