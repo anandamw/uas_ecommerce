@@ -28,7 +28,10 @@ class CartController extends Controller
         Keranjang::create($data);
 
 
-        return redirect('/kasir');
+        if (auth()->user()->role == 'admin') {
+            return redirect('/kasir');
+        }
+        return redirect('/karyawan/kasir');
     }
 
 
@@ -47,13 +50,18 @@ class CartController extends Controller
 
         Keranjang::where('token_keranjang', $token)->update($data);
 
-
-        return redirect('/kasir');
+        if (auth()->user()->role == 'admin') {
+            return redirect('/kasir');
+        }
+        return redirect('/karyawan/kasir');
     }
 
     public function delete($token)
     {
         Keranjang::where('token_keranjang', $token)->delete();
-        return redirect('/kasir');
+        if (auth()->user()->role == 'admin') {
+            return redirect('/kasir');
+        }
+        return redirect('/karyawan/kasir');
     }
 }

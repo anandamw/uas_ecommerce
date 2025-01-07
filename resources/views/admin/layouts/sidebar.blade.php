@@ -29,57 +29,72 @@
         <div class="container-fluid">
             <div id="two-column-menu"></div>
             <ul class="navbar-nav" id="navbar-nav">
-                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                @if (auth()->user()->role == 'admin')
+                    <li class="menu-title"><span data-key="t-menu">Menu</span></li>
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="/dashboard">
-                        <i class="ri-dashboard-2-line"></i>
-                        <span data-key="t-widgets">Dashboard</span>
-                    </a>
-                </li>
-
-
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/dashboard">
+                            <i class="ri-home-4-line"></i> <!-- Ikon baru untuk Dashboard -->
+                            <span data-key="t-widgets">Dashboard</span>
+                        </a>
+                    </li>
+                @endif
 
                 <li class="menu-title">
-                    <i class="ri-more-fill"></i>
+                    <i class="ri-folder-3-line"></i> <!-- Ikon baru untuk judul Pages -->
                     <span data-key="t-pages">Pages</span>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="/kasir">
-                        <i class="ri-shopping-bag-2-line"></i> <!-- Ikon untuk Produks -->
-                        <span data-key="t-advance-ui">Kasir</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="/rekapitulasi">
-                        <i class="ri-bar-chart-box-line"></i> <!-- Ikon untuk Rekapitulasi -->
-                        <span data-key="t-advance-ui">Rekapitulasi</span>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="/produk">
-                        <i class="ri-bar-chart-box-line"></i> <!-- Ikon untuk Barang -->
-                        <span data-key="t-advance-ui">Produk Saya</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="/notifikasi">
-                        <i class="ri-bar-chart-box-line"></i> <!-- Ikon untuk Barang -->
-                        <span data-key="t-advance-ui">Notifikasi</span>
-                    </a>
-                </li>
-
-
-
-
-
-
-
+                @if (auth()->user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/kasir">
+                            <i class="ri-shopping-cart-line"></i> <!-- Ikon baru untuk Kasir -->
+                            <span data-key="t-advance-ui">Kasir</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/rekapitulasi">
+                            <i class="ri-file-list-3-line"></i> <!-- Ikon baru untuk Rekapitulasi -->
+                            <span data-key="t-advance-ui">Rekapitulasi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/produk">
+                            <i class="ri-price-tag-3-line"></i> <!-- Ikon baru untuk Produk Saya -->
+                            <span data-key="t-advance-ui">Produk Saya</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/notifikasi">
+                            <i class="ri-notification-3-line"></i> <!-- Ikon baru untuk Notifikasi -->
+                            <span data-key="t-advance-ui">Notifikasi</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/logout">
+                            <i class="ri-logout-circle-line"></i> <!-- Ikon baru untuk Logout -->
+                            <span data-key="t-advance-ui">Logout</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/karyawan/kasir">
+                            <i class="ri-shopping-cart-line"></i> <!-- Ikon baru untuk Kasir -->
+                            <span data-key="t-advance-ui">Kasir</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="/logout">
+                            <i class="ri-logout-circle-line"></i> <!-- Ikon baru untuk Logout -->
+                            <span data-key="t-advance-ui">Logout</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
         <!-- Sidebar -->
     </div>
+
 
     <div class="sidebar-background"></div>
 </div>

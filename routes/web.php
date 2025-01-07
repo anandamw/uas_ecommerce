@@ -32,30 +32,65 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-Route::middleware(['auth', 'userAkses:admin'])->group(function () {
-    Route::get('/home', function () {
-        return redirect('dashboard');
-    });
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
-    Route::get('/keranjang/{token}', [CartController::class, 'cart']);
-    Route::post('/update/{token}/keranjang', [CartController::class, 'update']);
-    Route::get('/keranjang/hapus/{token}', [CartController::class, 'delete']);
 
-    Route::get('/kasir', [ProdukController::class, 'index']);
-    Route::post('/kasir/{id}/update', [ProdukController::class, 'update']);
-    Route::post('/kasir/store', [ProdukController::class, 'store']);
-    Route::get('/kasir/{id}/delete', [ProdukController::class, 'delete']);
 
-    Route::get('/pages', [HomeController::class, 'index']);
-
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/home', [AuthController::class, 'url']);
     Route::post('/checkout', [CheckoutController::class, 'checkout']);
     Route::get('/checkout-detail', [CheckoutController::class, 'details']);
-
     Route::get('/final', [CheckoutController::class, 'final']);
-    Route::get('/rekapitulasi', [RekapitulasiController::class, 'index']);
+    Route::middleware(['auth', 'userAkses:admin'])->group(function () {
 
-    Route::get('/produk', [ProdukController::class, 'detail']);
-    Route::get('/notifikasi', [ProdukController::class, 'notif']);
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        });
+        Route::get('/keranjang/{token}', [CartController::class, 'cart']);
+        Route::post('/update/{token}/keranjang', [CartController::class, 'update']);
+        Route::get('/keranjang/hapus/{token}', [CartController::class, 'delete']);
+
+        Route::get('/kasir', [ProdukController::class, 'index']);
+        Route::post('/kasir/{id}/update', [ProdukController::class, 'update']);
+        Route::post('/kasir/store', [ProdukController::class, 'store']);
+        Route::get('/kasir/{id}/delete', [ProdukController::class, 'delete']);
+
+        Route::get('/pages', [HomeController::class, 'index']);
+
+
+
+
+
+        Route::get('/rekapitulasi', [RekapitulasiController::class, 'index']);
+
+        Route::get('/produk', [ProdukController::class, 'detail']);
+        Route::get('/notifikasi', [ProdukController::class, 'notif']);
+    });
+
+
+    Route::middleware(['auth', 'userAkses:karyawan'])->group(function () {
+
+
+
+
+
+
+        Route::get('/karyawan/keranjang/{token}', [CartController::class, 'cart']);
+        Route::post('/karyawan/update/{token}/keranjang', [CartController::class, 'update']);
+        Route::get('/karyawan/keranjang/hapus/{token}', [CartController::class, 'delete']);
+
+        Route::get('/karyawan/kasir', [ProdukController::class, 'index']);
+
+
+
+        Route::get('/karyawan/pages', [HomeController::class, 'index']);
+
+        Route::post('/checkout', [CheckoutController::class, 'checkout']);
+        Route::get('/karyawan/checkout-detail', [CheckoutController::class, 'details']);
+
+        Route::get('/karyawan/final', [CheckoutController::class, 'final']);
+        Route::get('/karyawan/rekapitulasi', [RekapitulasiController::class, 'index']);
+
+        Route::get('/karyawan/produk', [ProdukController::class, 'detail']);
+        Route::get('/karyawan/notifikasi', [ProdukController::class, 'notif']);
+    });
 });

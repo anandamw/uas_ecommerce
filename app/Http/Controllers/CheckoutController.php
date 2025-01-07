@@ -85,6 +85,9 @@ class CheckoutController extends Controller
 
         toast('Transaksi Berhasil !!', 'success');
 
-        return redirect('/kasir');
+        if (auth()->user()->role == 'admin') {
+            return redirect('/kasir');
+        }
+        return redirect('/karyawan/kasir');
     }
 }

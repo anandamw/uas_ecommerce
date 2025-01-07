@@ -26,8 +26,12 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-header">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Tambah
-                                    Produk</button>
+                                @if (auth()->user()->role == 'admin')
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#createModal">Tambah
+                                        Produk</button>
+                                @endif
+
 
                                 @include('admin.produk.create')
 
@@ -75,19 +79,30 @@
                                                 <td>{{ $item->stok }}</td>
                                                 <td>Rp, {{ $item->harga }}</td>
                                                 <td>
-                                                    <a href="/keranjang/{{ $item->token_produks }}" class="btn btn-primary">
+                                                    @if (auth()->user()->role == 'admin')
+                                                        <a href="/keranjang/{{ $item->token_produks }}"
+                                                            class="btn btn-primary">
+                                                            <i class="ri-shopping-cart-fill"></i>
+                                                            Keranjang</a>
+                                                    @endif
+                                                    <a href="/karyawan/keranjang/{{ $item->token_produks }}"
+                                                        class="btn btn-primary">
                                                         <i class="ri-shopping-cart-fill"></i>
                                                         Keranjang</a>
+
                                                     {{-- href="/produk/{{ $item->token_produks }}/update" --}}
-                                                    <button class="btn btn-warning" data-bs-toggle="modal"
-                                                        data-bs-target="#showModal{{ $item->id }}">
-                                                        <i class="ri-shopping-cart-fill"></i>
-                                                        Edit</button>
-                                                    {{-- href="/produk/{{ $item->token_produks }}/delete" --}}
-                                                    <button class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#modalHapus{{ $item->id }}">
-                                                        <i class="ri-shopping-cart-fill"></i>
-                                                        Hapus</button>
+
+                                                    @if (auth()->user()->role == 'admin')
+                                                        <button class="btn btn-warning" data-bs-toggle="modal"
+                                                            data-bs-target="#showModal{{ $item->id }}">
+                                                            <i class="ri-shopping-cart-fill"></i>
+                                                            Edit</button>
+                                                        {{-- href="/produk/{{ $item->token_produks }}/delete" --}}
+                                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                                            data-bs-target="#modalHapus{{ $item->id }}">
+                                                            <i class="ri-shopping-cart-fill"></i>
+                                                            Hapus</button>
+                                                    @endif
 
                                                     <!-- Modal Hapus -->
                                                     <div class="modal fade" id="modalHapus{{ $item->id }}"
@@ -165,8 +180,14 @@
 
                                     <tbody>
                                         @foreach ($carts as $index => $item)
-                                            <form method="post" action="/update/{{ $item->token_keranjang }}/keranjang">
+                                            @if (auth()->user()->role == 'admin')
+                                                <form method="post"
+                                                    action="/update/{{ $item->token_keranjang }}/keranjang">
+                                            @endif
+                                            <form method="post"
+                                                action="/karyawan/update/{{ $item->token_keranjang }}/keranjang">
                                                 @csrf
+
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ $item->token_produks }}</td>
@@ -196,7 +217,8 @@
                                                             Update
                                                         </button>
                                                         <div type="button" class="text-white btn btn-danger"
-                                                            data-bs-toggle="modal" data-bs-target=".modal-delete">
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modal-delete-{{ $item->id }}">
                                                             <i class="ri-delete-bin-line"></i>
                                                             Hapus
                                                         </div>
@@ -205,31 +227,38 @@
 
                                                 </tr>
                                             </form>
-                                            <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog"
-                                                aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modal-delete-{{ $item->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="deleteModalLabel-{{ $item->id }}"
+                                                aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-body text-center p-5">
                                                             <lord-icon src="https://cdn.lordicon.com/hrqwmuhr.json"
                                                                 trigger="loop" colors="primary:#121331,secondary:#08a88a"
-                                                                style="width:120px;height:120px"></lord-icon>
+                                                                style="width:120px;height:120px">
+                                                            </lord-icon>
                                                             <div class="mt-4">
-                                                                <h4 class="mb-3">Oops something went wrong!</h4>
-                                                                <p class="text-muted mb-4"> The transfer was not
-                                                                    successfully received by us. the email of the
-                                                                    recipient
-                                                                    wasn't correct.</p>
+                                                                <h4 class="mb-3">Apakah Anda yakin ingin menghapus?</h4>
+                                                                <p class="text-muted mb-4">Data yang dihapus tidak dapat
+                                                                    dikembalikan.</p>
                                                                 <div class="hstack gap-2 justify-content-center">
                                                                     <button type="button" class="btn btn-light"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <a href="/keranjang/hapus/{{ $item->token_keranjang }}"
+                                                                        data-bs-dismiss="modal">Batal</button>
+
+                                                                    @if (auth()->user()->role == 'admin')
+                                                                        <a href="/keranjang/hapus/{{ $item->token_keranjang }}"
+                                                                            class="btn btn-danger">Hapus</a>
+                                                                    @endif
+                                                                    <a href="/karyawan/keranjang/hapus/{{ $item->token_keranjang }}"
                                                                         class="btn btn-danger">Hapus</a>
+
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
 
 
@@ -254,7 +283,9 @@
                     <!-- End Table Card -->
 
                 </div><!-- End Row -->
+
                 <form method="post" action="/checkout">
+
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">

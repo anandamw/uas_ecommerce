@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PDO;
 use PhpParser\Node\Expr\FuncCall;
 
 class AuthController extends Controller
@@ -25,8 +26,24 @@ class AuthController extends Controller
             if (auth()->user()->role == 'admin') {
                 return redirect('/dashboard');
             } elseif (auth()->user()->role == 'karyawan') {
-                return redirect('/produk');
+                return redirect('/karyawan/kasir');
             }
         }
+    }
+
+    public function url()
+    {
+        if (auth()->user()->role == 'admin') {
+            return redirect('/dashboard');
+        } elseif (auth()->user()->role == 'karyawan') {
+            return redirect('/karyawan/kasir');
+        }
+    }
+
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect('/');
     }
 }
