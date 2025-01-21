@@ -19,6 +19,6 @@ class DashboardController extends Controller
 
         $users = User::all();
 
-        return view('admin.dashboard', compact('users','totalKeuntungan', 'totalCustomerSukses', 'totalProduk', 'totalUser'));
+        return view('admin.dashboard', compact('users', 'totalKeuntungan', 'totalCustomerSukses', 'totalProduk', 'totalUser'));
     }
 }
