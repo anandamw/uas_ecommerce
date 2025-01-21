@@ -77,18 +77,19 @@
                                                 <td>{{ $item->token_produks }}</td>
                                                 <td>{{ $item->judul_buku }}</td>
                                                 <td>{{ $item->stok }}</td>
-                                                <td>Rp, {{ $item->harga }}</td>
+                                                <td>Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
                                                 <td>
                                                     @if (auth()->user()->role == 'admin')
                                                         <a href="/keranjang/{{ $item->token_produks }}"
                                                             class="btn btn-primary">
                                                             <i class="ri-shopping-cart-fill"></i>
                                                             Keranjang</a>
+                                                    @else
+                                                        <a href="/karyawan/keranjang/{{ $item->token_produks }}"
+                                                            class="btn btn-primary">
+                                                            <i class="ri-shopping-cart-fill"></i>
+                                                            Keranjang</a>
                                                     @endif
-                                                    <a href="/karyawan/keranjang/{{ $item->token_produks }}"
-                                                        class="btn btn-primary">
-                                                        <i class="ri-shopping-cart-fill"></i>
-                                                        Keranjang</a>
 
                                                     {{-- href="/produk/{{ $item->token_produks }}/update" --}}
 
@@ -183,49 +184,49 @@
                                             @if (auth()->user()->role == 'admin')
                                                 <form method="post"
                                                     action="/update/{{ $item->token_keranjang }}/keranjang">
+                                                @else
+                                                    <form method="post"
+                                                        action="/karyawan/update/{{ $item->token_keranjang }}/keranjang">
                                             @endif
-                                            <form method="post"
-                                                action="/karyawan/update/{{ $item->token_keranjang }}/keranjang">
-                                                @csrf
+                                            @csrf
 
-                                                <tr>
-                                                    <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $item->token_produks }}</td>
-                                                    <td>{{ $item->judul_buku }}</td>
-                                                    <td>{{ $item->penerbit }}</td>
-                                                    <td>{{ $item->penulis }}</td>
-                                                    <td>
-                                                        <div class="input-step step-primary">
-                                                            <button type="button" class="minus"
-                                                                data-index="{{ $index }}">–</button>
-                                                            <input type="number" name="quantity"
-                                                                class="product-quantity"
-                                                                value="{{ $item->quantity ?? '1' }}" min="0"
-                                                                max="100" data-index="{{ $index }}"
-                                                                data-price="{{ $item->harga }}">
-                                                            <button type="button" class="plus"
-                                                                data-index="{{ $index }}">+</button>
-                                                        </div>
-                                                    </td>
-                                                    <td>Rp, {{ number_format($item->harga) }}</td>
-                                                    <td id="total-{{ $index }}">
-                                                        {{ $item->total_harga ?? 'Rp, 0' }}</td>
-                                                    <td>
+                                            <tr>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $item->token_produks }}</td>
+                                                <td>{{ $item->judul_buku }}</td>
+                                                <td>{{ $item->penerbit }}</td>
+                                                <td>{{ $item->penulis }}</td>
+                                                <td>
+                                                    <div class="input-step step-primary">
+                                                        <button type="button" class="minus"
+                                                            data-index="{{ $index }}">–</button>
+                                                        <input type="number" name="quantity" class="product-quantity"
+                                                            value="{{ $item->quantity ?? '1' }}" min="0"
+                                                            max="100" data-index="{{ $index }}"
+                                                            data-price="{{ $item->harga }}">
+                                                        <button type="button" class="plus"
+                                                            data-index="{{ $index }}">+</button>
+                                                    </div>
+                                                </td>
+                                                <td>Rp, {{ number_format($item->harga) }}</td>
+                                                <td id="total-{{ $index }}">
+                                                    {{ $item->total_harga ?? 'Rp, 0' }}</td>
+                                                <td>
 
-                                                        <button type="submit" class="btn btn-warning text-white">
-                                                            <i class="ri-edit-line"></i>
-                                                            Update
-                                                        </button>
-                                                        <div type="button" class="text-white btn btn-danger"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#modal-delete-{{ $item->id }}">
-                                                            <i class="ri-delete-bin-line"></i>
-                                                            Hapus
-                                                        </div>
-                                                    </td>
+                                                    <button type="submit" class="btn btn-warning text-white">
+                                                        <i class="ri-edit-line"></i>
+                                                        Update
+                                                    </button>
+                                                    <div type="button" class="text-white btn btn-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modal-delete-{{ $item->id }}">
+                                                        <i class="ri-delete-bin-line"></i>
+                                                        Hapus
+                                                    </div>
+                                                </td>
 
 
-                                                </tr>
+                                            </tr>
                                             </form>
                                             <!-- Modal -->
                                             <div class="modal fade" id="modal-delete-{{ $item->id }}" tabindex="-1"
@@ -284,63 +285,69 @@
 
                 </div><!-- End Row -->
 
-                <form method="post" action="/checkout">
+                @if (auth()->user()->role == 'admin')
+                    <form method="post" action="/checkout">
+                    @else
+                        <form method="post" action="/karyawan/checkout">
+                @endif
 
-                    @csrf
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">
 
-                                <div class="card-body">
-                                    <div class="live-preview">
-                                        <div class="row gy-4">
-                                            <div class="col-xxl-3 col-md-6">
-                                                <div>
-                                                    <label for="basiInput" class="form-label">Nama Pembeli</label>
-                                                    <input type="text" name="nama_pembeli" class="form-control"
-                                                        id="basiInput" />
-                                                </div>
-                                            </div>
-                                            <!--end col-->
-                                            <div class="col-xxl-3 col-md-6">
-                                                <label for="basiInput" class="form-label">Pilih Jenis Kelamin:</label>
 
-                                                <select class="form-select mb-3" name="jenis_kelamin"
-                                                    aria-label="Default select example">
-                                                    <option selected disabled>Open this select menu</option>
-                                                    <option value="1">Laki-Laki</option>
-                                                    <option value="2">Perempuan</option>
-                                                </select>
-                                            </div>
-                                            <!--end col-->
-                                            <div class="col-xxl-3 col-md-6">
-                                                <div>
-                                                    <label for="basiInput" class="form-label">Alamat</label>
-                                                    <input type="text" class="form-control" name="alamat"
-                                                        id="basiInput" />
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-3 col-md-6">
-                                                <div>
-                                                    <label for="basiInput" class="form-label">No Telepon</label>
-                                                    <input type="text" class="form-control" name="no_telepon"
-                                                        id="basiInput" />
-                                                </div>
-                                            </div>
+                @csrf
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
 
-                                            <div class="col-xxl-3 col-md-6">
-                                                <h6 id="total-harga">Total Harga: 0</h6>
+                            <div class="card-body">
+                                <div class="live-preview">
+                                    <div class="row gy-4">
+                                        <div class="col-xxl-3 col-md-6">
+                                            <div>
+                                                <label for="basiInput" class="form-label">Nama Pembeli</label>
+                                                <input type="text" name="nama_pembeli" class="form-control"
+                                                    id="basiInput" />
                                             </div>
                                         </div>
-                                        <!--end row-->
-                                    </div>
+                                        <!--end col-->
+                                        <div class="col-xxl-3 col-md-6">
+                                            <label for="basiInput" class="form-label">Pilih Jenis Kelamin:</label>
 
+                                            <select class="form-select mb-3" name="jenis_kelamin"
+                                                aria-label="Default select example">
+                                                <option selected disabled>Open this select menu</option>
+                                                <option value="1">Laki-Laki</option>
+                                                <option value="2">Perempuan</option>
+                                            </select>
+                                        </div>
+                                        <!--end col-->
+                                        <div class="col-xxl-3 col-md-6">
+                                            <div>
+                                                <label for="basiInput" class="form-label">Alamat</label>
+                                                <input type="text" class="form-control" name="alamat"
+                                                    id="basiInput" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-3 col-md-6">
+                                            <div>
+                                                <label for="basiInput" class="form-label">No Telepon</label>
+                                                <input type="text" class="form-control" name="no_telepon"
+                                                    id="basiInput" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-3 col-md-6">
+                                            <h6 id="total-harga">Total Harga: 0</h6>
+                                        </div>
+                                    </div>
+                                    <!--end row-->
                                 </div>
+
                             </div>
-                            <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
                         </div>
-                        <!--end col-->
+                        <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
                     </div>
+                    <!--end col-->
+                </div>
                 </form>
 
 

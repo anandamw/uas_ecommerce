@@ -11,9 +11,8 @@ class Produk extends Model
     protected $table = "produks";
     protected $guarded = ["id"];
 
-
     public static function notification()
     {
-        return Produk::where('stok', '<', 10)->get();
+        return Produk::where("stok", "<", 10)->get();
     }
 }

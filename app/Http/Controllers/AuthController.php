@@ -27,7 +27,11 @@ class AuthController extends Controller
                 return redirect('/dashboard');
             } elseif (auth()->user()->role == 'karyawan') {
                 return redirect('/karyawan/kasir');
+            } else {
+                return redirect()->back()->with('error', 'Role Tidak Diketahui');
             }
+        } else {
+            return redirect()->back()->with('error', 'Email/Password Salah');
         }
     }
 

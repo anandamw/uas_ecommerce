@@ -4,6 +4,7 @@ use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
@@ -37,14 +38,12 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/home', [AuthController::class, 'url']);
-    Route::post('/checkout', [CheckoutController::class, 'checkout']);
     Route::get('/checkout-detail', [CheckoutController::class, 'details']);
     Route::get('/final', [CheckoutController::class, 'final']);
     Route::middleware(['auth', 'userAkses:admin'])->group(function () {
 
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        });
+        Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::post('/checkout', [CheckoutController::class, 'checkout']);
         Route::get('/keranjang/{token}', [CartController::class, 'cart']);
         Route::post('/update/{token}/keranjang', [CartController::class, 'update']);
         Route::get('/keranjang/hapus/{token}', [CartController::class, 'delete']);
@@ -69,22 +68,18 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(['auth', 'userAkses:karyawan'])->group(function () {
 
-
-
-
-
-
+        Route::get('/karyawan/kasir', [ProdukController::class, 'index']);
         Route::get('/karyawan/keranjang/{token}', [CartController::class, 'cart']);
         Route::post('/karyawan/update/{token}/keranjang', [CartController::class, 'update']);
         Route::get('/karyawan/keranjang/hapus/{token}', [CartController::class, 'delete']);
+        Route::post('/karyawan/checkout', [CheckoutController::class, 'checkout']);
 
-        Route::get('/karyawan/kasir', [ProdukController::class, 'index']);
 
 
 
         Route::get('/karyawan/pages', [HomeController::class, 'index']);
 
-        Route::post('/checkout', [CheckoutController::class, 'checkout']);
+        Route::post('/karyawan/checkout', [CheckoutController::class, 'checkout']);
         Route::get('/karyawan/checkout-detail', [CheckoutController::class, 'details']);
 
         Route::get('/karyawan/final', [CheckoutController::class, 'final']);
