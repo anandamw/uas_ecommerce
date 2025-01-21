@@ -240,9 +240,15 @@
                                     <div class="card">
                                         <div class="card-header align-items-center d-flex">
                                             <h4 class="card-title mb-0 flex-grow-1">
-                                                Management Users
+                                                Manajemen Pengguna
                                             </h4>
 
+                                            <div class="flex-shrink-0">
+                                                <div class="dropdown card-header-dropdown">
+
+                                                    <a class="dropdown-item" href="#">Export Data</a>
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- end card header -->
 
@@ -293,7 +299,7 @@
                     </div>
                     <!-- end col -->
 
-                  
+
                     <!-- end col -->
                 </div>
             </div>
@@ -301,23 +307,7 @@
         </div>
         <!-- End Page-content -->
 
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        © Velzon.
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="text-sm-end d-none d-sm-block">
-                            Design & Develop by Themesbrand
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+
     </div>
     <!-- end main content-->
 @endsection
