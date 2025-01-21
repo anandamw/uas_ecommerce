@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Velzon - Admin & Dashboard Template</title>
+    <title>Code x Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -42,7 +42,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box horizontal-logo">
-                        
+
                         </div>
 
                         <button type="button"
@@ -55,7 +55,7 @@
                             </span>
                         </button>
 
-                 
+
                     </div>
 
                     <div class="d-flex align-items-center">
@@ -120,8 +120,7 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                        src="{{ asset('') }}assets/images/users/avatar-1.jpg"
-                                        alt="Header Avatar" />
+                                        src="{{ asset('') }}assets/images/users/avatar-1.jpg" alt="Header Avatar" />
                                     <span class="text-start ms-xl-2">
                                         <span
                                             class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ auth()->user()->role }}</span>

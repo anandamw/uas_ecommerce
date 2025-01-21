@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['auth', 'userAkses:admin'])->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::get('/export', [DashboardController::class, 'export']);
         Route::post('/checkout', [CheckoutController::class, 'checkout']);
         Route::get('/keranjang/{token}', [CartController::class, 'cart']);
         Route::post('/update/{token}/keranjang', [CartController::class, 'update']);
