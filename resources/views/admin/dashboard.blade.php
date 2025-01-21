@@ -246,7 +246,7 @@
                                             <div class="flex-shrink-0">
                                                 <div class="dropdown card-header-dropdown">
 
-                                                    <a class="dropdown-item" href="#">Export Data</a>
+                                                    <a class="dropdown-item" href="/export">Export Data</a>
                                                 </div>
                                             </div>
                                         </div>
