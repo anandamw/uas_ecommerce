@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('token_customer')->nullable();
             $table->string('nama_pelayan')->nullable();
             $table->string('nama_pembeli')->nullable();
-            $table->string('jenis_kelamin')->nullable();
+
             $table->string('alamat')->nullable();
             $table->string('no_telepon')->nullable();
             $table->foreignId('produks_id')->constrained()->onDelete('cascade');

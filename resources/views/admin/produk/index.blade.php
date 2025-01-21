@@ -309,17 +309,7 @@
                                             </div>
                                         </div>
                                         <!--end col-->
-                                        <div class="col-xxl-3 col-md-6">
-                                            <label for="basiInput" class="form-label">Pilih Jenis Kelamin:</label>
 
-                                            <select class="form-select mb-3" name="jenis_kelamin"
-                                                aria-label="Default select example">
-                                                <option selected disabled>Open this select menu</option>
-                                                <option value="1">Laki-Laki</option>
-                                                <option value="2">Perempuan</option>
-                                            </select>
-                                        </div>
-                                        <!--end col-->
                                         <div class="col-xxl-3 col-md-6">
                                             <div>
                                                 <label for="basiInput" class="form-label">Alamat</label>

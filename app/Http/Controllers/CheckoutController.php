@@ -27,7 +27,7 @@ class CheckoutController extends Controller
         // $request->validate([
         //     'nama_pembeli' => 'required|string|max:255',
         //     'alamat' => 'required|string|max:500',
-        //     'jenis_kelamin' => 'required|in:L,P',
+
         //     'no_telepon' => 'required|numeric|digits_between:10,15',
         // ]);
 
@@ -48,7 +48,7 @@ class CheckoutController extends Controller
                     'produks_id' => $item->produks_id,
                     'nama_pembeli' => $request->input('nama_pembeli'),
                     'alamat' => $request->input('alamat'),
-                    'jenis_kelamin' => $request->input('jenis_kelamin'),
+
                     'no_telepon' => $request->input('no_telepon'),
                 ]);
             }

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('bahasa');
             $table->string('stok');
             $table->string('harga_beli');
-
             $table->string('harga');
             $table->timestamps();
         });
